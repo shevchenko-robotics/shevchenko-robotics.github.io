@@ -1,0 +1,1522 @@
+<!doctype html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Максим Шевченко — инженер-робототехник и преподаватель</title>
+<meta content="Инженер-робототехник и преподаватель. Космическая, промышленная и мобильная робототехника, инженерное образование." name="description"/>
+<link href="https://maksimshevchenko.ru/" rel="canonical"/>
+<link href="https://maksimshevchenko.ru/" hreflang="ru" rel="alternate"/>
+<link href="https://maksimshevchenko.ru/en/" hreflang="en" rel="alternate"/>
+<link href="https://maksimshevchenko.ru/" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="https://maksimshevchenko.ru/" property="og:url"/>
+<meta content="Максим Шевченко" property="og:title"/>
+<meta content="Инженер-робототехник и преподаватель" property="og:description"/>
+<meta content="https://maksimshevchenko.ru/og.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="en_US" property="og:locale:alternate"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="43ca04fe0772f251" name="yandex-verification"/>
+<meta content="tU9a76zFFwpLHRhxzFcVc9oYLAnylqnFnk6rPxQiQa8" name="google-site-verification"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Максим Шевченко", "alternateName": ["Шевченко Максим Юрьевич", "Maksim Shevchenko"], "jobTitle": "Инженер-робототехник, преподаватель", "url": "https://maksimshevchenko.ru/", "image": "https://maksimshevchenko.ru/photo.jpg", "sameAs": ["https://github.com/shevchenko-robotics", "https://t.me/m_shevchenko"], "affiliation": [{"@type": "CollegeOrUniversity", "name": "МГТУ им. Н. Э. Баумана"}, {"@type": "CollegeOrUniversity", "name": "МГТУ «СТАНКИН»"}], "alumniOf": {"@type": "CollegeOrUniversity", "name": "МГТУ им. Н. Э. Баумана"}, "knowsAbout": ["Робототехника", "Промышленные роботы", "Мобильные роботы", "ROS 2", "Космическая робототехника", "Инженерное образование"]}</script>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link as="font" crossorigin="" href="/fonts/onest-cyrillic-wght-normal.woff2" rel="preload" type="font/woff2"/>
+<script>/* theme chosen with the header button: "light" / "dark"; nothing saved = follow the system. Runs before the first paint so the page never flashes the other theme */
+try{var th=localStorage.getItem("theme");if(th==="light"||th==="dark")document.documentElement.setAttribute("data-theme",th)}catch(e){}</script>
+<style>
+@font-face{font-family:"Onest";font-style:normal;font-display:swap;font-weight:100 900;
+  src:url(/fonts/onest-cyrillic-wght-normal.woff2) format("woff2");
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Onest";font-style:normal;font-display:swap;font-weight:100 900;
+  src:url(/fonts/onest-latin-wght-normal.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --bg:#E9ECEF;       /* anodized aluminium */
+  --panel:#DDE2E6;
+  --ink:#1B2430;      /* graphite navy */
+  --steel:#66737F;
+  --rule:#C3CBD2;
+  --safety:#F2B705;   /* industrial safety yellow, used only for joints and focus */
+  --link:#1F4E79;
+  --z-g:#2E9E5B;--z-y:#E3A500;--z-r:#C9302C;
+  --font:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+:root{color-scheme:light dark}
+:root[data-theme="light"]{color-scheme:light}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161B21; --panel:#1E252D; --ink:#E4E8EC; --steel:#94A1AD; --rule:#2E3741; --link:#9CC3EA;
+    --z-g:#4CC283; --z-y:#F2B705; --z-r:#EF5B55;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#161B21; --panel:#1E252D; --ink:#E4E8EC; --steel:#94A1AD; --rule:#2E3741; --link:#9CC3EA;
+  --z-g:#4CC283; --z-y:#F2B705; --z-r:#EF5B55;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.62 var(--font);font-feature-settings:"tnum" 0}
+a{color:var(--link);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--safety);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+header .who{font-weight:600;color:var(--ink);text-decoration:none;font-size:16px}
+.lang{display:flex;gap:2px;font-size:15px}
+.lang a{color:var(--steel);padding:4px 8px;border-radius:6px;text-decoration:none}
+.lang a:hover{color:var(--ink)}
+.lang a[aria-current="page"]{color:var(--ink);font-weight:650;background:var(--panel)}
+.tools{display:flex;align-items:center;gap:6px}
+.theme{width:34px;height:34px;padding:0;border:0;border-radius:8px;background:none;color:var(--steel);display:grid;place-items:center;cursor:pointer}
+.theme:hover{color:var(--ink);background:var(--panel)}
+.theme svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme svg[data-mode]{display:none}
+html:not([data-theme]) .theme svg[data-mode="auto"],html[data-theme="light"] .theme svg[data-mode="light"],html[data-theme="dark"] .theme svg[data-mode="dark"]{display:block}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:end;padding:24px 0 64px}
+h1{font-weight:760;font-size:clamp(52px,8vw,104px);line-height:.9;letter-spacing:-.045em;margin:0 0 32px}
+h1 span{display:block}
+/* "Shevchenko" in Latin is ~17% wider than "Шевченко": cap the size by the column width so it never runs under the arm panel */
+@media screen{
+  .hero>div:first-child{container-type:inline-size}
+  html[lang="en"] h1{font-size:min(clamp(52px,8vw,104px),17.8cqi)}
+}
+.intro{font-size:clamp(19px,2vw,22px);line-height:1.5;max-width:30ch;margin:0 0 32px;color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:17px;font-weight:550}
+.links a{color:var(--ink)}
+
+.kin{position:absolute;right:14px;top:12px;display:flex;gap:5px;z-index:2}
+.kin button{width:36px;height:36px;padding:0;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--steel);display:grid;place-items:center;cursor:pointer}
+.kin button svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.kin button:hover{color:var(--ink)}
+.kin button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.kin .sep{width:1px;background:var(--rule);margin:4px 2px}
+.kin .tog[aria-pressed="true"]{background:var(--bg);color:var(--ink);border-color:var(--steel)}
+.kin .tog[aria-pressed="false"]{opacity:.6}
+.kin button:focus-visible{outline:3px solid var(--safety);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cell:focus-visible{outline:3px solid var(--safety);outline-offset:3px}
+.cell{position:relative;background:var(--panel);border-radius:20px;aspect-ratio:1/1;max-height:560px;width:100%;overflow:hidden;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none}
+.cell svg{display:block;width:100%;height:100%}
+.cell .bad{stroke:#C2413A}
+.readout{position:absolute;left:20px;right:20px;bottom:16px;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--steel);font-variant-numeric:tabular-nums;pointer-events:none}
+.readout .joints,.readout .tcp{display:flex;gap:12px}
+.readout .tcp{gap:8px;margin-left:auto}
+/* status line under the floor is drawn in the SVG; on narrow panels the readout takes that space, so it sits just above the floor */
+.status{display:none}
+@media (max-width:520px){
+  #singTxt{display:none}
+  .status{display:block;position:absolute;left:12px;right:12px;bottom:calc(15.4% + 6px);text-align:center;font-size:12.5px;line-height:1.3;pointer-events:none}
+  .status:empty{display:none}
+  .status span{background:var(--panel);box-shadow:0 0 0 3px var(--panel);border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+}
+@media (max-width:520px){.readout{flex-wrap:wrap;row-gap:1px;bottom:5px;line-height:1.2}.readout .joints{gap:10px}}
+.readout label{white-space:nowrap;pointer-events:auto;cursor:text}
+/* the values double as inputs: type an angle or a coordinate, Enter moves the arm */
+.readout input{pointer-events:auto;font:inherit;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);background:transparent;width:3.6ch;padding:0 1px;margin:0;border:0;border-bottom:1px dashed var(--rule);border-radius:0;text-align:right;cursor:text}
+.readout input.wide{width:4.6ch}
+.readout input:hover{border-bottom-color:var(--steel)}
+.readout input:focus{outline:none;background:var(--bg);border-bottom:1.5px solid var(--ink)}
+.readout input:focus-visible{outline:3px solid var(--safety);outline-offset:1px}
+.readout input.pending{color:#C2413A;border-bottom:1.5px dashed #C2413A}
+.readout input[readonly]{border-bottom-color:transparent;cursor:default}
+@media (pointer:coarse){.readout input{font-size:16px}} /* iOS zooms into inputs smaller than 16px */
+.touch-only{display:none}
+@media (pointer:coarse){.touch-only{display:inline}.mouse-only{display:none}}
+
+/* teach pendant strip */
+.pendant{position:absolute;left:16px;right:278px;top:14px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;color:var(--steel)}
+.pendant .msg{padding:4px 4px}
+.pendant .msg.warn{color:#C2413A}
+.pendant .msg.note{color:var(--z-y)}
+.pendant button{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--rule);background:var(--bg);color:var(--ink);padding:4px 10px;border-radius:8px;line-height:1.4}
+.pendant button:disabled{opacity:.45;cursor:default}
+.pendant .seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.pendant .seg button{border:0;border-radius:0;background:transparent;color:var(--steel)}
+.pendant .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.pendant .run[aria-pressed="true"]{background:var(--safety);border-color:var(--ink)}
+.pendant .ctl{display:none;gap:8px;align-items:center;flex-wrap:wrap}
+.cell.has-points .pendant .ctl{display:flex}
+.pendant .addpt{display:none}
+.cell.manual .pendant .addpt{display:inline-block}
+@media (max-width:520px){.pendant{top:58px;right:52px}}
+
+/* sections */
+section{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px 48px;padding:56px 0;border-top:1px solid var(--rule)}
+h2{font-size:22px;font-weight:650;letter-spacing:-.01em;margin:0;line-height:1.3}
+.side{display:flex;flex-direction:column;gap:24px}
+.portrait{width:100%;max-width:240px;height:auto;border-radius:16px;display:block;background:var(--panel)}
+.prose p{margin:0 0 1em;max-width:62ch}
+.prose p:last-child{margin-bottom:0}
+.interests{margin:0 0 1em;padding-left:1.1em;max-width:62ch}
+.interests li{padding:2px 0}
+.interests li::marker{color:var(--steel)}
+.records{list-style:none;margin:0;padding:0;display:grid;gap:24px;max-width:64ch}
+.records .kind{display:block;color:var(--steel);font-size:15px}
+.records .title{display:block;font-weight:600}
+.records .meta{display:block;color:var(--steel);font-size:15.5px;margin-top:2px}
+.mentions{list-style:none;margin:0;padding:0;display:grid;gap:20px;max-width:64ch}
+.mentions a{color:var(--ink);font-weight:550}
+.mentions .src{display:block;color:var(--steel);font-size:15px;margin-top:2px}
+
+.chain{list-style:none;margin:0;padding:0;position:relative}
+.chain::before{content:"";position:absolute;left:7px;top:12px;bottom:12px;width:2px;background:var(--rule)}
+.chain li{position:relative;padding:0 0 28px 40px}
+.chain li:last-child{padding-bottom:0}
+.chain li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--steel)}
+.chain li.now::before{background:var(--safety);border-color:var(--ink)}
+.chain .org{font-weight:650}
+.chain .what{color:var(--steel);max-width:58ch}
+
+.kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.kit h3{font-size:17px;font-weight:650;margin:0 0 8px}
+.kit ul{list-style:none;margin:0;padding:0;color:var(--steel)}
+.kit li{padding:2px 0}
+
+
+.contact-big{font-size:clamp(28px,4.4vw,46px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin:0 0 18px}
+.contact-big a{color:var(--ink);text-decoration-thickness:2px}
+.contact-list{display:flex;flex-wrap:wrap;gap:10px 28px;font-weight:550}
+
+footer{padding:40px 0 56px;color:var(--steel);font-size:14px;border-top:1px solid var(--rule)}
+
+.courses{display:grid;gap:26px;max-width:64ch}
+.courses h3{font-size:17px;font-weight:650;margin:0 0 6px}
+.courses p{margin:0;color:var(--steel)}
+.courses .lead-s{margin-bottom:6px}
+.courses ul{margin:0;padding-left:1.1em;color:var(--steel)}
+.courses li{padding:2px 0}
+.courses a{color:var(--ink)}
+.faq{border-top:1px solid var(--rule);padding:10px 0;max-width:62ch}
+.faq:last-of-type{border-bottom:1px solid var(--rule);margin-bottom:1em}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--steel);font-weight:400;transition:transform .2s}
+.faq[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:8px 0 0;color:var(--steel)}
+
+/* print: the page becomes a tidy one-column CV */
+@media print{
+  @page{margin:14mm 16mm}
+  :root,:root:not([data-theme="light"]),:root[data-theme]{--bg:#fff;--panel:#fff;--ink:#000;--steel:#333;--rule:#bbb;--link:#000;color-scheme:light}
+  body{font-size:10.5pt;line-height:1.45;background:#fff}
+  .wrap{max-width:none;padding:0}
+  header .tools,.cell,.links,#students,#mentions,footer,.kin{display:none!important}
+  .hero{display:block;padding:0 0 8mm}
+  h1{font-size:28pt;margin:0 0 3mm}
+  .intro{max-width:none;margin:0}
+  section{display:block;padding:3.5mm 0}
+  h2{font-size:12pt;margin:0 0 2mm;break-after:avoid}
+  .chain li,.records li,.courses>div,.kit>div{break-inside:avoid}
+  .chain li{padding-bottom:3mm}
+  .prose p{margin:0 0 1.5mm}
+  .portrait{display:none}
+  .side{display:block}
+  .kit{grid-template-columns:repeat(3,1fr);gap:4mm}
+  a{text-decoration:none}
+  .faq{display:none}
+  #contact .contact-big{font-size:14pt}
+}
+
+[data-en]{display:none!important}
+html[lang="en"] [data-ru]{display:none!important}
+html[lang="en"] [data-en]{display:revert!important}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding-bottom:48px}
+  .cell{max-height:none}
+  section{grid-template-columns:1fr;gap:20px;padding:44px 0}
+  .portrait{max-width:280px}
+  .kit{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){
+  .wrap{padding:0 16px}
+  body{font-size:17px}
+  .kit{grid-template-columns:1fr;gap:20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<a class="who" href="#top"><span>maksimshevchenko.ru</span></a>
+<div class="tools">
+<nav aria-label="Язык / Language" class="lang">
+<a aria-current="page" href="/" hreflang="ru" lang="ru">Рус</a>
+<a href="/en/" hreflang="en" lang="en">Eng</a>
+</nav>
+<button class="theme" id="themeBtn" type="button">
+<svg aria-hidden="true" data-mode="auto" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"></path></svg>
+<svg aria-hidden="true" data-mode="light" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55"></path></svg>
+<svg aria-hidden="true" data-mode="dark" viewbox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"></path></svg>
+</button>
+</div>
+</header>
+<main id="top">
+<div class="hero">
+<div>
+<h1><span>Максим</span><span>Шевченко</span></h1>
+
+<p class="intro">Инженер-робототехник и преподаватель. Проектирую роботов, программирую их и учу этому студентов.</p>
+
+<div class="links">
+<a href="https://t.me/m_shevchenko" rel="noopener" target="_blank">Telegram</a>
+<a href="https://github.com/shevchenko-robotics" rel="me noopener" target="_blank">GitHub</a>
+<a download="" href="/cv/shevchenko-cv-ru.pdf">Резюме (PDF)</a>
+<a class="em" data-e="ur.oknehcvehsmiskam@xobni" href="#contact">inbox<span aria-hidden="true"> [@] </span>maksimshevchenko.ru</a>
+</div>
+</div>
+<div aria-describedby="kbdHelp" class="cell" id="cell" tabindex="0">
+<p class="sr-only" id="kbdHelp"><span>Управление с клавиатуры: стрелки двигают схват, с Shift быстрее, Enter ставит точку программы, Esc сбрасывает программу. В ручном режиме стрелки сдвигают схват на 1 мм, с Shift на 10 мм; углы и координаты вводятся в поля под панелью.</span></p>
+<svg aria-label="Робот-манипулятор следует за курсором" id="arm" role="img" viewbox="0 0 520 520">
+<g fill="none">
+<defs>
+<pattern height="9" id="hatch" patterntransform="rotate(45)" patternunits="userSpaceOnUse" width="9">
+<line stroke="var(--steel)" stroke-opacity=".38" stroke-width="2" x1="0" x2="0" y1="0" y2="9"></line>
+</pattern>
+<mask height="520" id="nrMask" maskunits="userSpaceOnUse" width="520" x="0" y="0">
+<image height="520" id="nrImg" preserveaspectratio="none" width="520" x="0" y="0"/>
+</mask>
+</defs>
+<rect fill="url(#hatch)" height="520" id="noreach" mask="url(#nrMask)" opacity="0" width="520" x="0" y="0"></rect>
+<text fill="#C2413A" font-family="inherit" font-size="13" id="singTxt" stroke="none" text-anchor="middle" x="260" y="463"></text>
+<line stroke="var(--steel)" stroke-width="2" x1="40" x2="480" y1="440" y2="440"></line>
+<g fill="var(--steel)" id="ruler" stroke="var(--steel)" style="display:none"></g>
+<g id="path"></g>
+<g id="trail" stroke="var(--link)" stroke-linecap="round"></g>
+<g id="wps"></g>
+<g id="target" opacity="0" stroke="var(--steel)" stroke-width="1.5">
+<circle r="9"></circle><line x1="-16" x2="-5"></line><line x1="5" x2="16"></line><line y1="-16" y2="-5"></line><line y1="5" y2="16"></line>
+</g>
+<g id="armg" style="transition:opacity .22s"></g>
+<circle fill="var(--link)" id="tcp" r="3.2"></circle>
+</g>
+</svg>
+<div aria-label="Тип кинематики / Kinematics" class="kin" id="kin" role="group">
+<button aria-pressed="false" class="tog" id="gaugeBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M6 21a10 10 0 0 1 20 0" stroke-width="2.4"></path><path d="M16 21 L22 13" stroke-width="2.4"></path><circle cx="16" cy="21" fill="currentColor" r="2.2" stroke="none"></circle><path d="M6 21h2.5M23.5 21H26" stroke-width="2"></path></svg></button>
+<button aria-pressed="false" class="tog" id="rulerBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M3 20 L20 3 L29 12 L12 29 Z" stroke-width="2.2"></path><path d="M7.5 15.5l2.5 2.5M11 12l1.8 1.8M14.5 8.5l2.5 2.5M18 5l1.8 1.8" stroke-width="2"></path></svg></button>
+<button aria-pressed="false" class="tog" id="manBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><rect height="15" rx="3" stroke-width="2.2" width="24" x="4" y="9"></rect><path d="M9 14h1.5M15 14h1.5M21 14h1.5M10 19h12" stroke-width="2.2"></path></svg></button>
+<span aria-hidden="true" class="sep"></span>
+<button aria-pressed="true" data-kin="serial" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M7 29h12" stroke-width="2.4"></path><path d="M13 27 L10 14 L21 8 L26 12" stroke-width="3.2"></path><circle cx="13" cy="27" fill="currentColor" r="2.2" stroke="none"></circle><circle cx="10" cy="14" fill="currentColor" r="2" stroke="none"></circle><circle cx="21" cy="8" fill="currentColor" r="2" stroke="none"></circle></svg></button>
+<button aria-pressed="false" data-kin="pallet" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M5 29h12" stroke-width="2.4"></path><path d="M11 26 L13 11 L27 13" stroke-width="3"></path><path d="M11 26 L7 24.5 L9 9.5 L13 11" stroke-width="1.6"></path><path d="M27 13 V19 M24 19 H30" stroke-width="2.2"></path></svg></button>
+<button aria-pressed="false" data-kin="fivebar" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M3 29h26" stroke-width="2.4"></path><path d="M10 26 L5 15 L16 7 L27 15 L22 26" stroke-width="2.6"></path><circle cx="10" cy="26" fill="currentColor" r="2.2" stroke="none"></circle><circle cx="22" cy="26" fill="currentColor" r="2.2" stroke="none"></circle><circle cx="16" cy="7" fill="currentColor" r="2.2" stroke="none"></circle></svg></button>
+</div>
+<div class="pendant" id="pendant">
+<button class="addpt" id="addPt" type="button"><span>+ Точка</span></button>
+<span class="msg" id="msg">
+<span><span class="mouse-only">Ведите курсором — манипулятор следует. Щелчок ставит точку программы.</span><span class="touch-only">Ведите пальцем — манипулятор следует. Короткое касание ставит точку.</span></span>
+
+</span>
+<span class="ctl">
+<span aria-label="Тип движения" class="seg" role="group">
+<button aria-pressed="true" data-move="J" title="Интерполяция в пространстве суставов" type="button">MoveJ</button>
+<button aria-pressed="false" data-move="L" title="Прямолинейное движение схвата" type="button">MoveL</button>
+</span>
+<button aria-pressed="false" class="run" disabled="" id="run" type="button"><span>Пуск</span></button>
+<button id="clear" type="button"><span>Сбросить</span></button>
+</span>
+</div>
+<div aria-live="polite" class="status" id="status"></div>
+<div class="readout" id="readout">
+<span class="joints"><label>J1 <input autocomplete="off" class="man" data-j="0" enterkeyhint="go" id="a1" inputmode="decimal" spellcheck="false" value="0"/>°</label><label>J2 <input autocomplete="off" class="man" data-j="1" enterkeyhint="go" id="a2" inputmode="decimal" spellcheck="false" value="0"/>°</label><label>J3 <input autocomplete="off" class="man" data-j="2" enterkeyhint="go" id="a3" inputmode="decimal" spellcheck="false" value="0"/>°</label></span>
+<span class="tcp"><label>X <input autocomplete="off" class="man wide" data-ax="x" enterkeyhint="go" id="tx" inputmode="decimal" spellcheck="false" value="0"/></label><label>Y <input autocomplete="off" class="man wide" data-ax="y" enterkeyhint="go" id="ty" inputmode="decimal" spellcheck="false" value="0"/></label><span>мм</span></span>
+</div>
+</div>
+</div>
+<section>
+<div class="side">
+<h2><span>Обо мне</span></h2>
+<img alt="" class="portrait" height="999" loading="lazy" src="/photo.jpg" width="800"/>
+</div>
+<div class="prose">
+<div>
+<p>Больше одиннадцати лет занимаюсь робототехникой. Начинал в РКК «Энергия» с исследований и разработок в космической робототехнике, потом перешёл в университеты.</p>
+<p>Сейчас преподаю в МГТУ им. Н. Э. Баумана и МГТУ «СТАНКИН», веду студенческие проекты, а за рубежом — курс по промышленным роботам на английском языке. Пишу программы повышения квалификации для инженеров.</p>
+<p>Мне интересно, где робот встречается с реальной задачей: манипулятор в цехе или мобильная платформа, которая сама находит дорогу. А в преподавании для меня главное, чтобы мои студенты после выпуска сразу могли работать с настоящим оборудованием.</p>
+</div>
+
+</div>
+</section>
+<section>
+<h2><span>Путь</span></h2>
+<ol class="chain">
+<li>
+<div class="org">РКК «Энергия»</div>
+<div class="what">Исследования и разработки в космической робототехнике.</div>
+
+</li>
+<li class="now">
+<div class="org">МГТУ им. Н. Э. Баумана</div>
+<div class="what">Учился робототехнике и мехатронике, теперь преподаю.</div>
+
+</li>
+<li class="now">
+<div class="org">МГТУ «СТАНКИН»</div>
+<div class="what">Преподавание, лаборатория робототехники, студенческое бюро робототехники: команды, мобильные платформы, соревнования. Команда бюро стала призёром инженерного хакатона РКК «Энергия».</div>
+
+</li>
+<li class="now">
+<div class="org">Преподавание за рубежом</div>
+<div class="what">Курс по программированию и эксплуатации промышленных роботов на английском языке.</div>
+
+</li>
+</ol>
+</section>
+<section>
+<h2><span>С чем работаю</span></h2>
+<div class="kit">
+<div>
+<h3><span>Промышленные роботы</span></h3>
+<ul><li>ABB RobotStudio</li><li>FANUC</li><li>KUKA</li><li>Коллаборативные роботы</li></ul>
+</div>
+<div>
+<h3><span>Мобильные роботы</span></h3>
+<ul><li>ROS 2</li><li>Nav2</li><li>Gazebo</li><li>Компьютерное зрение, OpenCV</li></ul>
+</div>
+<div>
+<h3><span>Программирование</span></h3>
+<ul><li>Python</li><li>C++</li><li>MoveIt</li></ul>
+</div>
+</div>
+</section>
+<section id="courses">
+<h2><span>Курсы и программы</span></h2>
+<div class="courses">
+<div>
+<h3><span>Повышение квалификации</span></h3>
+<p class="lead-s">Программы для инженеров, которые разработал в МГТУ «СТАНКИН»:</p>
+
+<ul>
+<li><a href="https://dpo.stankin.ru/programs/robots/" rel="noopener" target="_blank">Промышленные манипуляционные роботы: современные технологии и применение</a></li>
+<li>Интеллектуальные системы в промышленной робототехнике</li>
+<li>Беспилотные авиационные системы</li>
+<li>Основы ROS 2</li>
+</ul>
+
+</div>
+<div>
+<h3><span>Курс на английском</span></h3>
+<p>«Programming and Operation of Industrial Robots» — программирование и эксплуатация промышленных роботов ABB, офлайн-программирование в RobotStudio. Читаю за рубежом.</p>
+
+</div>
+</div>
+</section>
+<section id="works">
+<h2><span>Патенты и публикации</span></h2>
+<ul class="records">
+<li>
+<span class="kind"><span>Патент на изобретение RU 2869712 C1, 2026</span></span>
+<div class="title">Способ управления совместным движением гетерогенной многоагентной системой</div>
+
+<div class="meta">Совместно с А. В. Пешниным, М. А. Гридневым, М. А. Шереужевым. Патентообладатель — МГТУ «СТАНКИН».</div>
+
+</li>
+<li>
+<span class="kind"><span>Программа для ЭВМ RU 2025695805, 2025</span></span>
+<div class="title">Модуль управления пользовательскими контейнерами для образовательной платформы по робототехнике (серверная часть)</div>
+
+<div class="meta">Совместно с М. А. Шереужевым, А. В. Пешниным, Ф. В. Девяткиным. Правообладатель — МГТУ «СТАНКИН».</div>
+
+</li>
+<li>
+<span class="kind"><span>Программа для ЭВМ RU 2023685496, 2023</span></span>
+<div class="title">Регулятор интенсивности освещения (LIV controller)</div>
+
+<div class="meta">Совместно с А. С. Героевым.</div>
+
+</li>
+<li>
+<span class="kind"><span>Статья, 2019</span></span>
+<div class="title">Моделирование червеобразного движения робота-змеи с учётом динамики</div>
+
+<div class="meta">В. А. Польский, А. А. Лукин, М. Ю. Шевченко. Электронный научный журнал «E-Scio.ru».</div>
+
+</li>
+<li>
+<span class="kind"><span>Акселераторы, 2023</span></span>
+<div class="title">Акселератор НТИ и «Физтех.Аэро»</div>
+
+<div class="meta">В Акселераторе НТИ — проект энергосберегающего уличного светильника, который сам ориентирует солнечные модули. «Физтех.Аэро» — акселерационная программа МФТИ.</div>
+
+</li>
+</ul>
+</section>
+<section id="students">
+<h2><span>Студентам и дипломникам</span></h2>
+<div class="prose">
+<div>
+<p>Руковожу выпускными работами студентов. Сейчас мне ближе всего такие темы:</p>
+<ul class="interests">
+<li>компьютерное зрение и нейросети для слежения за движущимися объектами;</li>
+<li>системы управления поворотными и следящими устройствами;</li>
+<li>промышленные и коллаборативные роботы: программирование, роботизированные ячейки, моделирование;</li>
+<li>мобильные роботы на ROS 2: навигация, локализация, симуляция;</li>
+<li>космическая робототехника.</li>
+</ul>
+<p>С каждым дипломником встречаемся раз в неделю. Все материалы работы студент ведёт в репозитории на GitHub по <a href="https://github.com/shevchenko-robotics/diploma-template" rel="noopener" target="_blank">шаблону</a>, готовые работы собраны в <a href="https://github.com/vkr-robotics" rel="noopener" target="_blank">vkr-robotics</a>.</p>
+<details class="faq"><summary>Как выбрать тему?</summary><p>Можно взять одну из тем выше или предложить свою. Тему уточняем на первой встрече: чтобы она была интересна вам и выполнима за отведённое время.</p></details>
+<details class="faq"><summary>Что подготовить к первой встрече?</summary><p>Пару слов о себе: что уже делали, какие языки и инструменты знаете, что хочется попробовать. Если есть аккаунт на GitHub, пришлите ссылку.</p></details>
+<details class="faq"><summary>Как устроена работа?</summary><p>Раз в неделю встречаемся, обсуждаем сделанное и ставим задачи на следующую неделю. Код, расчёты, черновики и заметки — в репозитории по шаблону, так прогресс виден обоим.</p></details>
+<p>Если хотите писать диплом со мной, напишите в <a href="https://t.me/m_shevchenko" rel="noopener" target="_blank">Telegram</a>: кто вы, где учитесь и какая тема вам интересна. Свою тему тоже можно предложить.</p>
+</div>
+
+</div>
+</section>
+<section id="mentions">
+<h2><span>Упоминания</span></h2>
+<ul class="mentions">
+<li>
+<a href="https://dpo.stankin.ru/programs/robots/" rel="noopener" target="_blank"><span>Разработчик программы повышения квалификации «Промышленные манипуляционные роботы: современные технологии и применение»</span></a>
+<span class="src"><span>Сайт ДПО МГТУ «СТАНКИН»</span></span>
+</li>
+<li>
+<a href="https://t.me/msutstankin/16182" rel="noopener" target="_blank"><span>Рассказал о проектировании робототехнических систем для обработки крупногабаритных криволинейных поверхностей на стратегической сессии «Морская робототехника» в Мурманске</span></a>
+<span class="src"><span>Telegram-канал МГТУ «СТАНКИН»</span></span>
+</li>
+<li>
+<a href="https://vkvideo.ru/playlist/-214524833_32/video-214524833_456246472?linked=1" rel="noopener" target="_blank"><span>Эксперт научного шоу «Первые в науке. Робототехника»: где учат на робототехника и как создают роботов</span></a>
+<span class="src"><span>VK Видео</span></span>
+</li>
+<li>
+<a href="https://t.me/msutstankin/13058" rel="noopener" target="_blank"><span>Выступил на конференции Концерна ВКО «Алмаз-Антей» о роботизации предприятий: чем университет может помочь — от аудита и НИОКР до внедрения роботизированных комплексов и подготовки персонала</span></a>
+<span class="src"><span>Telegram-канал МГТУ «СТАНКИН»</span></span>
+</li>
+<li>
+<a href="https://t.me/msutstankin/11239" rel="noopener" target="_blank"><span>Прочитал популярную лекцию «Роботы в космосе» ко Дню космонавтики</span></a>
+<span class="src"><span>Telegram-канал МГТУ «СТАНКИН»</span></span>
+</li>
+<li>
+<a href="https://t.me/msutstankin/10004" rel="noopener" target="_blank"><span>Рассказал о работе Молодёжного проектного центра СТАНКИНа на форуме студенческих конструкторских бюро в МГТУ им. Н. Э. Баумана</span></a>
+<span class="src"><span>Telegram-канал МГТУ «СТАНКИН»</span></span>
+</li>
+<li>
+<a href="https://t.me/msutstankin/9551" rel="noopener" target="_blank"><span>Представлял СТАНКИН на стратегической сессии о перспективах образовательной робототехники в России на площадке «Сбера»</span></a>
+<span class="src"><span>Telegram-канал МГТУ «СТАНКИН»</span></span>
+</li>
+</ul>
+</section>
+<section id="contact">
+<h2><span>Связаться</span></h2>
+<div>
+<p class="contact-big"><a href="https://t.me/m_shevchenko" rel="noopener" target="_blank">@m_shevchenko</a></p>
+<div class="contact-list">
+<span>Быстрее всего — в Telegram, или напишите на почту:</span>
+<a class="em" data-e="ur.oknehcvehsmiskam@xobni" href="#contact">inbox<span aria-hidden="true"> [@] </span>maksimshevchenko.ru</a>
+<a href="https://github.com/shevchenko-robotics" rel="me noopener" target="_blank">github.com/shevchenko-robotics</a>
+</div>
+</div>
+</section>
+</main>
+<footer>© <span id="y">2026</span> <span>Максим Шевченко</span></footer>
+</div>
+<script>
+(function(){
+  /* e-mail: assembled here so the address never appears in the HTML source */
+  document.querySelectorAll("a.em").forEach(function(a){var e=a.getAttribute("data-e").split("").reverse().join("");a.href="mailto:"+e;a.textContent=e});
+  /* language is fixed per page (/ = Russian, /en/ = English); the build step strips the other language */
+  document.getElementById("y").textContent=new Date().getFullYear();
+
+  /* theme button: follow the system -> light -> dark -> follow the system; the choice is remembered in localStorage "theme" */
+  (function(){
+    var root=document.documentElement,btn=document.getElementById("themeBtn"),en=root.lang==="en";
+    var NAMES={auto:en?"as in the system":"как в системе",light:en?"light":"светлая",dark:en?"dark":"тёмная"};
+    function mode(){return root.getAttribute("data-theme")||"auto"}
+    function label(){var t=(en?"Theme: ":"Тема: ")+NAMES[mode()];btn.title=t;btn.setAttribute("aria-label",t)}
+    btn.addEventListener("click",function(){
+      var next={auto:"light",light:"dark",dark:"auto"}[mode()];
+      if(next==="auto")root.removeAttribute("data-theme");else root.setAttribute("data-theme",next);
+      try{if(next==="auto")localStorage.removeItem("theme");else localStorage.setItem("theme",next)}catch(_){}
+      label();
+    });
+    label();
+  })();
+
+  /* robot arm demo with three planar kinematics: serial 3R arm, palletizer (parallelogram) and parallel 5-bar.
+     Base frame origin is at (260,400) in SVG units; 1 unit = 4 mm; Y points up in the readout.
+     Shared engine: numeric-Jacobian damped least squares IK, joint speed limit, reachable-area map,
+     random-point demo, teach mode (MoveJ / MoveL), pointer and keyboard input (pointer tracking is armed by entering the arm panel and disarmed by the demo). */
+  var svg=document.getElementById("arm"),cell=document.getElementById("cell"),hero=document.querySelector(".hero");
+  var NS="http://www.w3.org/2000/svg",$=function(id){return document.getElementById(id)};
+  var D=Math.PI/180,ORIGIN={x:260,y:400},FLOOR_Y=440,RED="#C2413A";
+  /* coordinates are in real on-screen millimetres (CSS mm, 96 px = 25.4 mm): MMU = mm per SVG unit, follows the panel size.
+     Base frame: X from the axis of the base, Y up from the floor */
+  var PX_MM=96/25.4,MMU=.26;
+  function toMm(p){return {x:(p.x-ORIGIN.x)*MMU,y:(FLOOR_Y-p.y)*MMU}}
+  function fromMm(m){return pt(ORIGIN.x+m.x/MMU,FLOOR_Y-m.y/MMU)}
+  var VMAX=1.3; /* rad/s per joint (MoveL) */
+  var TRACK_VMAX=1.1,TRACK_RATE=6; /* following the pointer: joint speed limit, rad/s, and how fast the IK target catches up with the pointer, 1/s */
+  var IDLE_MS=5000; /* pause after the last pointer or keyboard input before the automatic demo starts */
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var lang=function(){return document.documentElement.lang==="en"?"en":"ru"};
+  function T(ru,en){return lang()==="en"?en:ru}
+
+  /* ---------- geometry helpers ---------- */
+  function pt(x,y){return {x:x,y:y}}
+  function polar(o,len,a){return pt(o.x+len*Math.cos(a),o.y-len*Math.sin(a))}
+  function segDist(a,b,c,d){
+    function pd(p,s,e){var vx=e.x-s.x,vy=e.y-s.y,l=vx*vx+vy*vy,t=l?((p.x-s.x)*vx+(p.y-s.y)*vy)/l:0;t=t<0?0:t>1?1:t;var dx=s.x+t*vx-p.x,dy=s.y+t*vy-p.y;return Math.sqrt(dx*dx+dy*dy)}
+    function cr(o,p,r){return (p.x-o.x)*(r.y-o.y)-(p.y-o.y)*(r.x-o.x)}
+    var d1=cr(a,b,c),d2=cr(a,b,d),d3=cr(c,d,a),d4=cr(c,d,b);
+    if(((d1>0&&d2<0)||(d1<0&&d2>0))&&((d3>0&&d4<0)||(d3<0&&d4>0)))return 0;
+    return Math.min(pd(a,c,d),pd(b,c,d),pd(c,a,b),pd(d,a,b));
+  }
+  function inLim(M,qq){for(var i=0;i<M.n;i++)if(qq[i]<M.LIM[i][0]-1e-9||qq[i]>M.LIM[i][1]+1e-9)return false;return true}
+
+  /* ---------- appearance helpers: topology-optimised links ---------- */
+  function rpath(pts,r){
+    var n=pts.length,d="";
+    for(var i=0;i<n;i++){
+      var p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n];
+      var v1x=p0[0]-p1[0],v1y=p0[1]-p1[1],v2x=p2[0]-p1[0],v2y=p2[1]-p1[1];
+      var l1=Math.hypot(v1x,v1y),l2=Math.hypot(v2x,v2y),rr=Math.min(r,l1*.45,l2*.45);
+      var a=[p1[0]+v1x/l1*rr,p1[1]+v1y/l1*rr],b=[p1[0]+v2x/l2*rr,p1[1]+v2y/l2*rr];
+      d+=(i?"L":"M")+a[0].toFixed(1)+" "+a[1].toFixed(1)+"Q"+p1[0].toFixed(1)+" "+p1[1].toFixed(1)+" "+b[0].toFixed(1)+" "+b[1].toFixed(1);
+    }
+    return d+"Z";
+  }
+  function inset(tri,t){
+    var A=tri[0],B=tri[1],C=tri[2],a=Math.hypot(B[0]-C[0],B[1]-C[1]),b=Math.hypot(A[0]-C[0],A[1]-C[1]),c=Math.hypot(A[0]-B[0],A[1]-B[1]);
+    var p=a+b+c,ix=(a*A[0]+b*B[0]+c*C[0])/p,iy=(a*A[1]+b*B[1]+c*C[1])/p;
+    var area=Math.abs((B[0]-A[0])*(C[1]-A[1])-(C[0]-A[0])*(B[1]-A[1]))/2,r=area/(p/2);
+    if(r<=t+1)return null;var k=(r-t)/r;
+    return tri.map(function(P){return [ix+(P[0]-ix)*k,iy+(P[1]-iy)*k]});
+  }
+  /* link from joint (x0,0) radius r0 to joint (len,0) radius r1, slim waist, Warren-truss cut-outs */
+  function linkShape(len,r0,r1,waist,panels,wall,web,x0){
+    x0=x0||0;var N=24,top=[],bot=[],span=len-x0;
+    function h(x){var t=(x-x0)/span;return r0+(r1-r0)*t-waist*Math.sin(Math.PI*t)}
+    for(var i=0;i<=N;i++){var x=x0+span*i/N;top.push([x,-h(x)]);bot.push([x,h(x)])}
+    var d="M"+top[0][0]+" "+top[0][1];
+    for(i=1;i<=N;i++)d+="L"+top[i][0].toFixed(1)+" "+top[i][1].toFixed(1);
+    d+="A"+r1+" "+r1+" 0 0 1 "+len+" "+r1;
+    for(i=N-1;i>=0;i--)d+="L"+bot[i][0].toFixed(1)+" "+bot[i][1].toFixed(1);
+    d+="A"+r0+" "+r0+" 0 0 1 "+x0+" "+(-r0)+"Z";
+    if(panels>0){
+      var a0=x0+r0+5,a1=len-r1-5,nodes=[];
+      for(i=0;i<=panels;i++){var xx=a0+(a1-a0)*i/panels,hh=h(xx)-wall;nodes.push([xx,i%2?hh:-hh])}
+      for(i=0;i<panels-1;i++){var tri=inset([nodes[i],nodes[i+1],nodes[i+2]],web/2);if(tri)d+=rpath(tri,3.5)}
+    }
+    return d;
+  }
+  function mk(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);(parent||$("armg")).appendChild(e);return e}
+  function place(e,p,ang){e.setAttribute("transform","translate("+p.x.toFixed(2)+" "+p.y.toFixed(2)+") rotate("+(ang||0).toFixed(2)+")")}
+  function deg(a){return -a/D} /* math angle (CCW) -> SVG rotate() angle */
+  function driveCap(parent,r,capR,id){var g=mk("g",{},parent);mk("circle",{r:r,fill:"var(--ink)"},g);mk("circle",{id:id,r:capR,fill:"var(--safety)"},g);mk("circle",{r:Math.max(1.6,capR*.28),fill:"var(--ink)"},g);return g}
+  function pinCap(parent,r){var g=mk("g",{},parent);mk("circle",{r:r,fill:"var(--ink)"},g);mk("circle",{r:r*.45,fill:"var(--steel)"},g);return g}
+  function pedestal(parent,x0,x1){mk("path",{d:"M"+(x0-4)+" 440 L"+(x0+2)+" 418 Q"+(x0+4)+" 412 "+(x0+10)+" 412 L"+(x1-10)+" 412 Q"+(x1-4)+" 412 "+(x1-2)+" 418 L"+(x1+4)+" 440 Z",fill:"var(--ink)"},parent)}
+  function gripper(parent,len){ /* parallel gripper along +x, TCP at x=len */
+    mk("path",{d:rpath([[len-24,-12],[len-12,-12],[len-12,12],[len-24,12]],3),fill:"var(--ink)"},parent);
+    mk("path",{d:rpath([[len-13,-11],[len+2,-9],[len+2,-5],[len-13,-5]],1.5),fill:"var(--ink)"},parent);
+    mk("path",{d:rpath([[len-13,11],[len+2,9],[len+2,5],[len-13,5]],1.5),fill:"var(--ink)"},parent);
+  }
+
+  /* =================== kinematic models =================== */
+  var MODELS={};
+
+  /* --- 1. serial 3R arm (redundant for a 2D point) --- */
+  MODELS.serial=(function(){
+    var L=[115,85,40],RAD=[13,10,8],B=ORIGIN,BASE_SEG=[pt(236,424),pt(284,424)],BASE_R=16,tmp=[];
+    function fk(q,out){var a=q[0],x=B.x,y=B.y;out[0]=pt(x,y);for(var i=0;i<3;i++){if(i)a+=q[i];x+=L[i]*Math.cos(a);y-=L[i]*Math.sin(a);out[i+1]=pt(x,y)}return out}
+    var M={id:"serial",n:3,LIM:[[20*D,160*D],[-130*D,130*D],[-120*D,120*D]],q0:[100*D,-35*D,-60*D],HOME:[90*D,-20*D,-40*D],hops:[60,170],maxR:240,
+      title:{ru:"Последовательный манипулятор",en:"Serial arm"}};
+    M.tcp=function(q){return fk(q,tmp)[3]};
+    M.check=function(q){
+      if(!inLim(M,q))return 1;
+      var p=fk(q,tmp);
+      if(p[1].y>FLOOR_Y-RAD[0]||p[2].y>FLOOR_Y-RAD[1]||p[3].y>FLOOR_Y-6)return 2;
+      if(segDist(p[0],p[1],p[2],p[3])<RAD[0]+RAD[2]+3)return 3;
+      if(segDist(p[1],p[2],BASE_SEG[0],BASE_SEG[1])<RAD[1]+BASE_R||segDist(p[2],p[3],BASE_SEG[0],BASE_SEG[1])<RAD[2]+BASE_R)return 4;
+      return 0;
+    };
+    M.sample=function(visit){ /* self-collision does not depend on J1: prefilter (J2,J3) pairs */
+      var qq=[0,0,0];
+      for(var b=M.LIM[1][0];b<=M.LIM[1][1]+1e-9;b+=2.5*D)for(var c=M.LIM[2][0];c<=M.LIM[2][1]+1e-9;c+=2.5*D){
+        qq[0]=Math.PI/2;qq[1]=b;qq[2]=c;fk(qq,tmp);
+        if(segDist(tmp[0],tmp[1],tmp[2],tmp[3])<RAD[0]+RAD[2]+3)continue;
+        var score=Math.abs(b)*.6+Math.abs(c);
+        for(var a=M.LIM[0][0];a<=M.LIM[0][1]+1e-9;a+=1*D){qq[0]=a;if(!M.check(qq))visit(qq,tmp[3],score)}
+      }
+    };
+    M.seed=function(){return [rnd(M.LIM[0][0]+.2,M.LIM[0][1]-.2),(Math.random()<.5?-1:1)*rnd(25,110)*D,(Math.random()<.5?-1:1)*rnd(20,110)*D]};
+    M.build=function(g){
+      pedestal(g,230,290);mk("rect",{x:238,y:404,width:44,height:6,rx:3,fill:"var(--steel)"},g);
+      var l1=mk("g",{},g);mk("path",{d:linkShape(L[0],17,12,3.5,5,4.2,5),fill:"var(--ink)","fill-rule":"evenodd"},l1);
+      var l2=mk("g",{},g);mk("path",{d:linkShape(L[1],12,9,2.5,4,3.6,4.5),fill:"var(--ink)","fill-rule":"evenodd"},l2);
+      var l3=mk("g",{},g);mk("path",{d:linkShape(L[2]-20,9,7,1,0,0,0),fill:"var(--ink)"},l3);gripper(l3,L[2]);
+      var h=[driveCap(g,20,11,"j1"),driveCap(g,14,7.5,"j2"),driveCap(g,10,5.5,"j3")],P=[];
+      return function(q){
+        fk(q,P);
+        place(l1,P[0],deg(q[0]));place(l2,P[1],deg(q[0]+q[1]));place(l3,P[2],deg(q[0]+q[1]+q[2]));
+        for(var i=0;i<3;i++)place(h[i],P[i]);
+        return P[3];
+      };
+    };
+    /* all IK solutions for a point: tool angle phi on a grid x two elbow branches (index = elbow*PHI_N + phi step); null = invalid */
+    var PHI_N=90;M.PHI_N=PHI_N;
+    function wrap(a){while(a>Math.PI)a-=2*Math.PI;while(a<=-Math.PI)a+=2*Math.PI;return a}
+    /* exact IK for a tool angle phi and an elbow branch e (0: J2 > 0, 1: J2 < 0); null if invalid */
+    M.ikPhi=function(p,phi,e){
+      var px=p.x-B.x,py=B.y-p.y,wx=px-L[2]*Math.cos(phi),wy=py-L[2]*Math.sin(phi);
+      var c2=(wx*wx+wy*wy-L[0]*L[0]-L[1]*L[1])/(2*L[0]*L[1]);
+      if(c2>1||c2<-1)return null;
+      var q2=(e?-1:1)*Math.acos(c2),q1=Math.atan2(wy,wx)-Math.atan2(L[1]*Math.sin(q2),L[0]+L[1]*Math.cos(q2));
+      var qq=[wrap(q1),q2,0];qq[2]=wrap(phi-qq[0]-q2);
+      return M.check(qq)?null:qq;
+    };
+    M.ikAll=function(p){
+      var out=new Array(2*PHI_N+2),px=p.x-B.x,py=B.y-p.y;
+      for(var j=0;j<PHI_N;j++)for(var e=0;e<2;e++)out[e*PHI_N+j]=M.ikPhi(p,2*Math.PI*j/PHI_N,e);
+      /* the two stretched poses (J2 = 0) where the elbow branches meet: they bridge one branch to the other */
+      var R=L[0]+L[1],d=Math.hypot(px,py);out[2*PHI_N]=out[2*PHI_N+1]=null;
+      if(d>1e-6&&d<=R+L[2]&&d>=Math.abs(R-L[2])){
+        var aa=(R*R-L[2]*L[2]+d*d)/(2*d),hh=Math.sqrt(Math.max(0,R*R-aa*aa)),mx=px*aa/d,my=py*aa/d;
+        [1,-1].forEach(function(sg,k){
+          var wx=mx-sg*hh*py/d,wy=my+sg*hh*px/d,q1=Math.atan2(wy,wx),phi=Math.atan2(py-wy,px-wx);
+          var qq=[wrap(q1),0,wrap(phi-q1)];out[2*PHI_N+k]=M.check(qq)?null:qq;
+        });
+      }
+      return out;
+    };
+    M.gaugeR=[27,21,16];
+    M.gauges=function(q){var P=fk(q,[]);return [{c:P[0],ref:0},{c:P[1],ref:q[0]},{c:P[2],ref:q[0]+q[1]}]};
+    M.status=function(q){return Math.abs(q[1])<3*D&&Math.abs(q[2])<3*D?T("сингулярность: рука вытянута","singularity: arm fully stretched"):""};
+    return M;
+  })();
+
+  /* --- 2. palletizer: upper arm + forearm driven through a parallelogram from the base; the tool always points down --- */
+  MODELS.pallet=(function(){
+    var L1=125,L2=150,E=38,TOOL=36,B=ORIGIN,BASE_SEG=[pt(236,424),pt(284,424)];
+    var REL=[35*D,165*D]; /* angle between upper arm and forearm that the parallelogram allows */
+    function pts(q){
+      var el=polar(B,L1,q[0]),w=polar(el,L2,q[1]),rear=polar(el,-E,q[1]),crank=polar(B,-E,q[1]);
+      return {el:el,w:w,rear:rear,crank:crank,tcp:pt(w.x,w.y+TOOL)};
+    }
+    var M={id:"pallet",n:2,LIM:[[40*D,140*D],[-70*D,55*D]],q0:[105*D,-10*D],HOME:[95*D,-5*D],hops:[50,150],maxR:L1+L2+TOOL,
+      title:{ru:"Паллетайзер с параллелограммом",en:"Palletizer with a parallelogram"}};
+    M.tcp=function(q){return pts(q).tcp};
+    M.check=function(q){
+      if(!inLim(M,q))return 1;
+      var r=q[0]-q[1];if(r<REL[0]||r>REL[1])return 1;
+      var p=pts(q);
+      if(p.tcp.y>FLOOR_Y-6||p.w.y>FLOOR_Y-20||p.el.y>FLOOR_Y-16||p.rear.y>FLOOR_Y-10)return 2;
+      if(segDist(p.el,p.w,BASE_SEG[0],BASE_SEG[1])<26||segDist(p.w,p.tcp,BASE_SEG[0],BASE_SEG[1])<24)return 4;
+      return 0;
+    };
+    M.sample=function(visit){
+      var qq=[0,0];
+      for(var a=M.LIM[0][0];a<=M.LIM[0][1]+1e-9;a+=.3*D)for(var b=M.LIM[1][0];b<=M.LIM[1][1]+1e-9;b+=.3*D){
+        qq[0]=a;qq[1]=b;if(!M.check(qq))visit(qq,M.tcp(qq),Math.abs(a-b-100*D));
+      }
+    };
+    M.seed=function(){return [rnd(M.LIM[0][0],M.LIM[0][1]),rnd(M.LIM[1][0],M.LIM[1][1])]};
+    M.build=function(g){
+      pedestal(g,230,290);
+      var crank=mk("g",{},g);mk("path",{d:linkShape(0,9,7,0,0,0,0,-E),fill:"var(--ink)"},crank);
+      var rod=mk("line",{"stroke":"var(--ink)","stroke-width":7,"stroke-linecap":"round"},g);
+      var up=mk("g",{},g);mk("path",{d:linkShape(L1,18,13,3.5,5,4.4,5),fill:"var(--ink)","fill-rule":"evenodd"},up);
+      var fo=mk("g",{},g);mk("path",{d:linkShape(L2,13,8,2.5,5,3.6,4.5,-E),fill:"var(--ink)","fill-rule":"evenodd"},fo);
+      var tool=mk("g",{},g);
+      mk("path",{d:rpath([[-16,-4],[16,-4],[16,5],[-16,5]],2.5),fill:"var(--ink)"},tool);
+      mk("path",{d:rpath([[-6,4],[6,4],[6,TOOL-14],[-6,TOOL-14]],2),fill:"var(--ink)"},tool);
+      mk("path",{d:rpath([[-13,TOOL-15],[13,TOOL-15],[13,TOOL-9],[-13,TOOL-9]],2),fill:"var(--ink)"},tool);
+      mk("path",{d:rpath([[-13,TOOL-10],[-9,TOOL-10],[-9,TOOL+2],[-13,TOOL+2]],1.5),fill:"var(--ink)"},tool);
+      mk("path",{d:rpath([[9,TOOL-10],[13,TOOL-10],[13,TOOL+2],[9,TOOL+2]],1.5),fill:"var(--ink)"},tool);
+      var pins=[pinCap(g,7),pinCap(g,6),pinCap(g,6),pinCap(g,7)];
+      var base=mk("g",{},g);mk("circle",{r:21,fill:"var(--ink)"},base);mk("circle",{id:"j1",r:12,fill:"var(--safety)"},base);mk("circle",{r:7.5,fill:"var(--ink)"},base);mk("circle",{id:"j2",r:5,fill:"var(--safety)"},base);
+      return function(q){
+        var p=pts(q);
+        place(crank,B,deg(q[1]));
+        rod.setAttribute("x1",p.crank.x);rod.setAttribute("y1",p.crank.y);rod.setAttribute("x2",p.rear.x);rod.setAttribute("y2",p.rear.y);
+        place(up,B,deg(q[0]));place(fo,p.el,deg(q[1]));place(tool,p.w,0);
+        place(pins[0],p.el);place(pins[1],p.rear);place(pins[2],p.crank);place(pins[3],p.w);place(base,B);
+        return p.tcp;
+      };
+    };
+    M.gaugeR=[37,28];
+    M.gauges=function(){return [{c:B,ref:0},{c:B,ref:Math.PI}]}; /* J2 is read on the crank: it points opposite the forearm */
+    M.status=function(q){
+      var r=q[0]-q[1];
+      if(r-REL[0]<1.5*D)return T("параллелограмм сложен до упора","parallelogram folded to its stop");
+      if(REL[1]-r<1.5*D)return T("параллелограмм раскрыт до упора","parallelogram opened to its stop");
+      return "";
+    };
+    return M;
+  })();
+
+  /* --- 3. parallel 5-bar: two base drives, two proximal + two distal links meeting at the platform --- */
+  MODELS.fivebar=(function(){
+    var A=pt(215,400),Bp=pt(305,400),L1=100,L2=140,HMIN=.2*140;
+    function pts(q){
+      var e1=polar(A,L1,q[0]),e2=polar(Bp,L1,q[1]);
+      var dx=e2.x-e1.x,dy=e2.y-e1.y,d=Math.hypot(dx,dy);
+      if(d<1e-6||d>=2*L2)return null;
+      var h=Math.sqrt(L2*L2-d*d/4),mx=(e1.x+e2.x)/2,my=(e1.y+e2.y)/2;
+      return {e1:e1,e2:e2,h:h,p:pt(mx+h*dy/d,my-h*dx/d)}; /* assembly mode: platform above the line E1-E2 */
+    }
+    var M={id:"fivebar",n:2,LIM:[[15*D,200*D],[-20*D,165*D]],q0:[120*D,60*D],HOME:[120*D,60*D],hops:[50,140],maxR:250,
+      title:{ru:"Параллельный пятизвенник",en:"Parallel five-bar"}};
+    M.tcp=function(q){var p=pts(q);return p?p.p:pt(NaN,NaN)};
+    function legAngle(o,e,p){var ax=e.x-o.x,ay=e.y-o.y,bx=p.x-e.x,by=p.y-e.y;return Math.abs(ax*by-ay*bx)/(Math.hypot(ax,ay)*Math.hypot(bx,by))}
+    M.check=function(q){
+      if(!inLim(M,q))return 1;
+      var s=pts(q);if(!s||s.h<HMIN)return 3; /* too close to the parallel (type II) singularity */
+      if(s.e1.y>FLOOR_Y-16||s.e2.y>FLOOR_Y-16||s.p.y>FLOOR_Y-10)return 2;
+      if(segDist(A,s.e1,Bp,s.e2)<22)return 3;
+      if(segDist(A,s.e1,s.e2,s.p)<15||segDist(Bp,s.e2,s.e1,s.p)<15)return 3;
+      if(s.p.y>A.y-20&&s.p.x>A.x-18&&s.p.x<Bp.x+18)return 4;
+      return 0;
+    };
+    M.sample=function(visit){
+      var qq=[0,0];
+      for(var a=M.LIM[0][0];a<=M.LIM[0][1]+1e-9;a+=.35*D)for(var b=M.LIM[1][0];b<=M.LIM[1][1]+1e-9;b+=.35*D){
+        qq[0]=a;qq[1]=b;if(!M.check(qq)){var s=pts(qq);visit(qq,s.p,-s.h)}
+      }
+    };
+    M.seed=function(){return [rnd(M.LIM[0][0],M.LIM[0][1]),rnd(M.LIM[1][0],M.LIM[1][1])]};
+    M.build=function(g){
+      pedestal(g,190,330);
+      var p1=mk("g",{},g);mk("path",{d:linkShape(L1,15,10,3,4,4,4.5),fill:"var(--ink)","fill-rule":"evenodd"},p1);
+      var p2=mk("g",{},g);mk("path",{d:linkShape(L1,15,10,3,4,4,4.5),fill:"var(--ink)","fill-rule":"evenodd"},p2);
+      var d1=mk("g",{},g);mk("path",{d:linkShape(L2,7,6,1.5,6,2.4,3.2),fill:"var(--ink)","fill-rule":"evenodd"},d1);
+      var d2=mk("g",{},g);mk("path",{d:linkShape(L2,7,6,1.5,6,2.4,3.2),fill:"var(--ink)","fill-rule":"evenodd"},d2);
+      var e1=pinCap(g,9),e2=pinCap(g,9),plat=mk("g",{},g);
+      mk("circle",{r:11,fill:"var(--ink)"},plat);mk("circle",{r:5,fill:"var(--steel)"},plat);
+      var c1=driveCap(g,19,10.5,"j1"),c2=driveCap(g,19,10.5,"j2");
+      return function(q){
+        var s=pts(q);if(!s)return null;
+        place(p1,A,deg(q[0]));place(p2,Bp,deg(q[1]));
+        place(d1,s.e1,deg(Math.atan2(-(s.p.y-s.e1.y),s.p.x-s.e1.x)));place(d2,s.e2,deg(Math.atan2(-(s.p.y-s.e2.y),s.p.x-s.e2.x)));
+        place(e1,s.e1);place(e2,s.e2);place(plat,s.p);place(c1,A);place(c2,Bp);
+        return s.p;
+      };
+    };
+    M.gaugeR=[26,26];
+    M.gauges=function(){return [{c:A,ref:0},{c:Bp,ref:0}]};
+    M.status=function(q){
+      var s=pts(q);if(!s)return "";
+      if(s.h<HMIN*1.35)return T("рядом сингулярность второго рода: звенья почти на одной линии","near a type II singularity: distal links almost aligned");
+      if(legAngle(A,s.e1,s.p)<.06||legAngle(Bp,s.e2,s.p)<.06)return T("сингулярность первого рода: нога вытянута","type I singularity: a leg is fully stretched");
+      return "";
+    };
+    return M;
+  })();
+
+  /* =================== shared engine =================== */
+  var M=MODELS.serial,drawModel=null,q,qd,TCP=pt(0,0);
+  var goal=pt(340,260),cur=pt(340,260),lastMove=-1e9;
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function check(qq){return M.check(qq)}
+  function clampQ(qq){for(var i=0;i<M.n;i++)qq[i]=Math.max(M.LIM[i][0],Math.min(M.LIM[i][1],qq[i]));return qq}
+
+  /* DLS with a numeric Jacobian; for redundant models a "stay away from limits" term works in the null space.
+     settle=true keeps iterating after the TCP is on target, so the null-space term brings the pose to rest:
+     a reconfiguration then ends exactly in the pose the tracking IK would drift to, with no extra motion afterwards */
+  function ikFrom(v,t,iters,settle,lam){
+    var lam2=lam||64,n=M.n,h=1e-4,e=0;v=v.slice();
+    for(var k=0;k<iters;k++){
+      var p=M.tcp(v);if(!isFinite(p.x))break;
+      var ex=t.x-p.x,ey=-(t.y-p.y);e=Math.sqrt(ex*ex+ey*ey);
+      if(e<.25&&k>2&&!settle)break;
+      var J=[];
+      for(var i=0;i<n;i++){var vp=v.slice(),vm=v.slice();vp[i]+=h;vm[i]-=h;var a=M.tcp(vp),b=M.tcp(vm);J.push([(a.x-b.x)/(2*h),-(a.y-b.y)/(2*h)])}
+      if(!J.every(function(r){return isFinite(r[0])&&isFinite(r[1])}))break;
+      /* a joint that sits on its limit and would be pushed further is locked and the step is solved again with the
+         others; without this the clamp eats the step and the solver crawls along the limit */
+      var lock=[],dq,m=0;for(i=0;i<n;i++)lock.push(false);
+      for(var pass=0;pass<=n;pass++){
+        var A=lam2,B=0,Dd=lam2,free=0;
+        for(i=0;i<n;i++)if(!lock[i]){free++;A+=J[i][0]*J[i][0];B+=J[i][0]*J[i][1];Dd+=J[i][1]*J[i][1]}
+        var det=A*Dd-B*B,ux=(Dd*ex-B*ey)/det,uy=(-B*ex+A*ey)/det;dq=[];
+        for(i=0;i<n;i++)dq.push(lock[i]?0:J[i][0]*ux+J[i][1]*uy);
+        if(free>2){
+          var Ai=Dd/det,Bi=-B/det,Di=A/det,z=[],Jz0=0,Jz1=0;
+          for(i=0;i<n;i++){var mid=(M.LIM[i][0]+M.LIM[i][1])/2,half=(M.LIM[i][1]-M.LIM[i][0])/2,u=(v[i]-mid)/half;z.push(lock[i]?0:-.12*(u*u*u+.3*u));Jz0+=J[i][0]*z[i];Jz1+=J[i][1]*z[i]}
+          var w0=Ai*Jz0+Bi*Jz1,w1=Bi*Jz0+Di*Jz1;
+          for(i=0;i<n;i++)if(!lock[i])dq[i]+=z[i]-(J[i][0]*w0+J[i][1]*w1);
+        }
+        var hit=-1;
+        for(i=0;i<n&&hit<0;i++)if(!lock[i]&&((v[i]<=M.LIM[i][0]+1e-6&&dq[i]<0)||(v[i]>=M.LIM[i][1]-1e-6&&dq[i]>0)))hit=i;
+        if(hit<0)break;lock[hit]=true;
+      }
+      for(i=0;i<n;i++)m=Math.max(m,Math.abs(dq[i]));
+      if(m>.06)for(i=0;i<n;i++)dq[i]*=.06/m;
+      var ok=false;
+      for(var s=1;s>.1&&!ok;s*=.5){
+        var nq=clampQ(v.map(function(x,j){return x+dq[j]*s}));
+        if(!check(nq)){v=nq;ok=true}
+      }
+      if(!ok)break;
+    }
+    var pe=M.tcp(v);
+    return {q:v,err:isFinite(pe.x)?Math.hypot(t.x-pe.x,t.y-pe.y):1e9};
+  }
+  function drive(target,dt,vmax){
+    if(reduce){if(!check(target))q=target.slice();return}
+    var step=(vmax||VMAX)*dt,nq=q.map(function(x,i){var d=target[i]-x;return x+Math.max(-step,Math.min(step,d))});
+    if(!check(nq))q=nq;
+  }
+
+  /* ---------- reachable area ---------- */
+  var CELL=3,GW=Math.ceil(520/CELL),reach=null,cfg=null,reachList=[],buildToken=0;
+  function cellOf(p){var ix=Math.floor(p.x/CELL),iy=Math.floor(p.y/CELL);return (ix<0||iy<0||ix>=GW||iy>=GW)?-1:iy*GW+ix}
+  function reachable(p){
+    if(!reach)return Math.hypot(p.x-ORIGIN.x,p.y-ORIGIN.y)<=M.maxR&&p.y<FLOOR_Y-6;
+    var c=cellOf(p);return c>=0&&reach[c]===1;
+  }
+  function buildWorkspace(token){
+    if(token!==buildToken)return;
+    var n=GW*GW,hit=new Uint8Array(n),best=new Float32Array(n).fill(1e9),conf=new Float32Array(n*M.n),nn=M.n;
+    M.sample(function(qq,p,score){
+      var k=cellOf(p);if(k<0)return;hit[k]=1;
+      if(score<best[k]){best[k]=score;for(var i=0;i<nn;i++)conf[k*nn+i]=qq[i]}
+    });
+    var out=new Uint8Array(n);
+    for(var y=1;y<GW-1;y++)for(var x=1;x<GW-1;x++){
+      var i=y*GW+x;if(hit[i]){out[i]=1;continue}
+      var s=hit[i-1]+hit[i+1]+hit[i-GW]+hit[i+GW]+hit[i-GW-1]+hit[i-GW+1]+hit[i+GW-1]+hit[i+GW+1];
+      if(s>=5){out[i]=1;var src=hit[i-1]?i-1:hit[i+1]?i+1:hit[i-GW]?i-GW:i+GW;for(var j=0;j<nn;j++)conf[i*nn+j]=conf[src*nn+j]}
+    }
+    reach=out;cfg=conf;reachList=[];for(i=0;i<n;i++)if(out[i])reachList.push(i);
+    var cv=document.createElement("canvas");cv.width=GW;cv.height=GW;
+    var cx=cv.getContext("2d"),img=cx.createImageData(GW,GW);
+    for(i=0;i<n;i++){img.data[i*4]=img.data[i*4+1]=img.data[i*4+2]=255;img.data[i*4+3]=reach[i]?0:255}
+    cx.putImageData(img,0,0);
+    var big=document.createElement("canvas");big.width=big.height=520;
+    var bx=big.getContext("2d");bx.imageSmoothingEnabled=true;if("filter" in bx)bx.filter="blur(1.2px)";
+    bx.drawImage(cv,0,0,520,520);
+    $("nrImg").setAttribute("href",big.toDataURL("image/png"));
+    $("noreach").setAttribute("opacity","1");
+  }
+  function cellCfg(p){var c=cellOf(p);if(c<0||!reach||!reach[c])return null;var r=[];for(var i=0;i<M.n;i++)r.push(cfg[c*M.n+i]);return r}
+
+  function lerpQ(a,b,t){return a.map(function(x,i){return x+(b[i]-x)*t})}
+  function pathFree(a,b){for(var s=1;s<=16;s++)if(check(lerpQ(a,b,s/16)))return false;return true}
+  function planJoint(target){
+    if(pathFree(q,target))return [target];
+    if(pathFree(q,M.HOME)&&pathFree(M.HOME,target))return [M.HOME.slice(),target];
+    return [target];
+  }
+
+  /* ---------- joint gauges: a dial around each drive with green / yellow / red zones and a pointer ---------- */
+  /* the readout counts each joint from the middle of its range: 0° is the centre of the green zone */
+  function zero(i){return (M.LIM[i][0]+M.LIM[i][1])/2}
+  function zoneMargins(i){var r=M.LIM[i][1]-M.LIM[i][0];return {red:Math.max(4*D,.05*r),yel:Math.max(12*D,.15*r)}}
+  function zoneOf(i,v){var m=zoneMargins(i),d=Math.min(v-M.LIM[i][0],M.LIM[i][1]-v);return d<m.red?"r":d<m.red+m.yel?"y":"g"}
+  var ZC={g:"var(--z-g)",y:"var(--z-y)",r:"var(--z-r)"},gauges=[],showGauges=false; /* off on every page load; on only after the visitor presses the button (the choice is not remembered) */
+  try{localStorage.removeItem("gauges")}catch(_){} /* drop the choice remembered by earlier versions */
+  function setGauges(on){
+    showGauges=on;
+    gauges.forEach(function(G){G.g.style.display=on?"":"none"});
+    var b=$("gaugeBtn");b.setAttribute("aria-pressed",String(on));
+  }
+  function arcD(r,a0,a1){
+    var x0=r*Math.cos(a0),y0=-r*Math.sin(a0),x1=r*Math.cos(a1),y1=-r*Math.sin(a1);
+    return "M"+x0.toFixed(2)+" "+y0.toFixed(2)+"A"+r+" "+r+" 0 "+(a1-a0>Math.PI?1:0)+" 0 "+x1.toFixed(2)+" "+y1.toFixed(2);
+  }
+  function buildGauges(g){
+    gauges=[];
+    for(var i=0;i<M.n;i++){
+      var r=M.gaugeR[i],lo=M.LIM[i][0],hi=M.LIM[i][1],m=zoneMargins(i),grp=mk("g",{"class":"gauge"},g);
+      var gap=1.2*D/Math.max(1,r/20);
+      [[lo,lo+m.red,"r",.9],[lo+m.red,lo+m.red+m.yel,"y",.9],[lo+m.red+m.yel,hi-m.red-m.yel,"g",.45],[hi-m.red-m.yel,hi-m.red,"y",.9],[hi-m.red,hi,"r",.9]].forEach(function(z,k){
+        mk("path",{d:arcD(r,z[0]+(k?gap:0),z[1]-(k<4?gap:0)),stroke:ZC[z[2]],"stroke-width":3,"stroke-linecap":"butt",fill:"none",opacity:z[3]},grp);
+      });
+      [lo,hi].forEach(function(a){ /* end stops */
+        mk("line",{x1:((r-3.5)*Math.cos(a)).toFixed(2),y1:(-(r-3.5)*Math.sin(a)).toFixed(2),x2:((r+3.5)*Math.cos(a)).toFixed(2),y2:(-(r+3.5)*Math.sin(a)).toFixed(2),stroke:"var(--ink)","stroke-width":1.6,"stroke-linecap":"round"},grp);
+      });
+      var z0=(lo+hi)/2; /* zero mark */
+      mk("line",{x1:((r-5)*Math.cos(z0)).toFixed(2),y1:(-(r-5)*Math.sin(z0)).toFixed(2),x2:((r+1.5)*Math.cos(z0)).toFixed(2),y2:(-(r+1.5)*Math.sin(z0)).toFixed(2),stroke:"var(--ink)","stroke-width":1.2,"stroke-linecap":"round",opacity:.7},grp);
+      var nd=mk("path",{d:"M"+(r+8)+" 0L"+(r-4)+" -3.6Q"+(r-6)+" 0 "+(r-4)+" 3.6Z",fill:ZC.g,stroke:"var(--ink)","stroke-width":1.3,"stroke-linejoin":"round"},grp);
+      gauges.push({g:grp,needle:nd});
+      if(!showGauges)grp.style.display="none";
+    }
+  }
+  function drawGauges(){
+    var gs=M.gauges(q);
+    for(var i=0;i<gauges.length;i++){
+      var G=gauges[i],c=gs[i].c,z=zoneOf(i,q[i]);
+      G.g.setAttribute("transform","translate("+c.x.toFixed(2)+" "+c.y.toFixed(2)+") rotate("+(-gs[i].ref/D).toFixed(2)+")");
+      G.needle.setAttribute("transform","rotate("+(-q[i]/D).toFixed(2)+")");
+      if(G.z!==z){G.needle.setAttribute("fill",ZC[z]);G.z=z}
+    }
+  }
+
+  /* ---------- drawing ---------- */
+  var blocked=false,reconf=null,stillSince=0,idle=null;
+  function fmt(v){var r=Math.round(v);return String(r===0?0:r)}
+  function draw(){
+    var p=drawModel(q);if(p)TCP=p;drawGauges();
+    var status="";
+    for(var i=0;i<3;i++){
+      var b=$("a"+(i+1)),wrap=b.parentNode;
+      if(i>=M.n){wrap.style.display="none";continue}
+      wrap.style.display="";
+      var atLim=Math.min(q[i]-M.LIM[i][0],M.LIM[i][1]-q[i])<1.5*D,cap=$("j"+(i+1)),z=zoneOf(i,q[i]);
+      if(cap)cap.setAttribute("fill",ZC[z]);
+      if(document.activeElement!==b&&!b.classList.contains("pending"))b.value=fmt((q[i]-zero(i))/D);
+      b.style.color=z==="g"?"":ZC[z];b.readOnly=running;
+      if(atLim&&!status)status=T("J"+(i+1)+" на упоре","J"+(i+1)+" at its limit");
+    }
+    var tx=$("tx"),ty=$("ty");tx.readOnly=ty.readOnly=running;
+    var tm=toMm(TCP);
+    if(document.activeElement!==tx&&!tx.classList.contains("pending"))tx.value=fmt(tm.x);
+    if(document.activeElement!==ty&&!ty.classList.contains("pending"))ty.value=fmt(tm.y);
+    $("tcp").setAttribute("cx",TCP.x.toFixed(2));$("tcp").setAttribute("cy",TCP.y.toFixed(2));
+    if(!idle&&!parked&&!(reconf&&reconf.home)){var ms=M.status(q);if(ms)status=ms}
+    if(reconf&&!hold&&!reconf.home)status=T("меняю конфигурацию, чтобы дотянуться","changing arm configuration to reach the point");
+    if(blocked&&!status)status=T("манипулятор не дотягивается до этой точки","the arm cannot reach this point");
+    var sc=reconf&&!hold&&!reconf.home?"var(--z-y)":RED;
+    if(running&&seg&&seg.note){status=T(seg.note.ru,seg.note.en);sc=seg.note.c} /* MoveL notices sit under the floor for the whole segment */
+    var st=$("singTxt");if(st.textContent!==status){st.textContent=status;var hs=$("status");hs.innerHTML="";if(status){var sp=document.createElement("span");sp.textContent=status;hs.appendChild(sp)}}
+    $("status").style.color=sc;if(st.getAttribute("fill")!==sc)st.setAttribute("fill",sc); /* reconfiguring is a notice, not an error */
+  }
+
+  /* fading tool path, continuous from the TCP */
+  var trail=[],TR_LIFE=2400,BANDS=14,bands=[];
+  function trLife(){return idle?6500:TR_LIFE}
+  function drawTrail(now){
+    var tip=TCP,last=trail[trail.length-1];
+    if(!last||Math.hypot(tip.x-last.x,tip.y-last.y)>1)trail.push({x:tip.x,y:tip.y,t:now});
+    var life=trLife();while(trail.length>1&&now-trail[0].t>life)trail.shift();
+    var g=$("trail"),pts=trail.concat([{x:tip.x,y:tip.y,t:now}]);
+    if(!bands.length)for(var i=0;i<BANDS;i++){var pl=document.createElementNS(NS,"polyline");pl.setAttribute("fill","none");pl.setAttribute("stroke-linejoin","round");pl.setAttribute("stroke-linecap",i===BANDS-1?"round":"butt");g.appendChild(pl);bands.push(pl)}
+    var buf=[];for(i=0;i<BANDS;i++)buf.push("");
+    var prevB=-1,prevP=null;
+    for(var j=0;j<pts.length;j++){
+      var age=(now-pts[j].t)/life,bi=Math.min(BANDS-1,Math.max(0,Math.floor((1-age)*BANDS)));
+      var xy=pts[j].x.toFixed(1)+","+pts[j].y.toFixed(1)+" ";
+      if(bi!==prevB&&prevP)buf[bi]+=prevP;
+      buf[bi]+=xy;prevB=bi;prevP=xy;
+    }
+    for(i=0;i<BANDS;i++){var k=(i+1)/BANDS;bands[i].setAttribute("points",buf[i]);bands[i].setAttribute("stroke-width",(1+2.6*k).toFixed(2));bands[i].setAttribute("stroke-opacity",(.88*k).toFixed(3))}
+  }
+
+  /* ---------- teach mode ---------- */
+  var wps=[],MAXP=8,moveType="J",running=false,seg=null,msgTimer=0;
+  var msgDefault=$("msg").innerHTML;
+  function say(ru,en,warn,note){
+    var m=$("msg");clearTimeout(msgTimer);
+    m.textContent=T(ru,en);m.classList.toggle("warn",!!warn);m.classList.toggle("note",!!note);
+    msgTimer=setTimeout(function(){m.classList.remove("warn");m.classList.remove("note");if(hold)m.textContent=holdTxt();else m.innerHTML=wps.length?"":msgDefault},2400);
+  }
+  function renderWps(){
+    var g=$("wps");g.innerHTML="";
+    var path=$("path");path.innerHTML="";
+    if(wps.length>1){
+      var pl=document.createElementNS(NS,"polyline");
+      pl.setAttribute("points",wps.concat([wps[0]]).map(function(p){return p.x+","+p.y}).join(" "));
+      pl.setAttribute("stroke","var(--steel)");pl.setAttribute("stroke-width","1");pl.setAttribute("stroke-dasharray","2 5");pl.setAttribute("fill","none");
+      path.appendChild(pl);
+    }
+    wps.forEach(function(p,i){
+      var c=document.createElementNS(NS,"circle");c.setAttribute("cx",p.x);c.setAttribute("cy",p.y);c.setAttribute("r","5");
+      c.setAttribute("fill","var(--bg)");c.setAttribute("stroke","var(--ink)");c.setAttribute("stroke-width","2");g.appendChild(c);
+      var t=document.createElementNS(NS,"text");t.setAttribute("x",p.x+9);t.setAttribute("y",p.y-8);t.setAttribute("font-size","13");
+      t.setAttribute("fill","var(--ink)");t.setAttribute("font-family","inherit");t.textContent="P"+(i+1);g.appendChild(t);
+    });
+    cell.classList.toggle("has-points",wps.length>0);
+    $("run").disabled=wps.length<2;
+    if(wps.length&&!running)$("msg").innerHTML="";
+    if(!wps.length)$("msg").innerHTML=msgDefault;
+    if(hold)$("msg").textContent=holdTxt();
+  }
+  function addPoint(p,exactQ){
+    if(running)return;
+    if(!exactQ&&!reachable(p)){flagBad(true);say("Точка вне зоны досягаемости","This point is out of reach",true);return}
+    if(wps.length>=MAXP){say("Не больше "+MAXP+" точек","Up to "+MAXP+" points",true);return}
+    var r=exactQ?{q:exactQ.slice()}:ikFrom(cellCfg(p)||q,p,120);
+    wps.push({x:p.x,y:p.y,q:r.q});renderWps();
+  }
+  function flagBad(b){$("target").classList.toggle("bad",b)}
+  function setRunning(on){
+    running=on&&wps.length>1;
+    if(running){var ae=document.activeElement;if(ae&&ae.classList&&ae.classList.contains("man"))ae.blur()}
+    $("run").setAttribute("aria-pressed",String(running));
+    $("run").textContent=running?T("Стоп","Stop"):T("Пуск","Run");
+    seg=null;
+    if(running)nextSeg(0);else{qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(cur.x,cur.y)}
+  }
+  function nextSeg(i){
+    i=i%wps.length;var to=wps[i];
+    var s={i:i,type:moveType,from:pt(TCP.x,TCP.y),to:to,t:0,warned:false};
+    if(moveType==="J"){
+      var from=q.slice();
+      s.legs=planJoint(to.q).map(function(b){var a=from,m=0;for(var k=0;k<M.n;k++)m=Math.max(m,Math.abs(b[k]-a[k]));from=b;return {a:a,b:b,dur:Math.max(.5,m/1.3),t:0}});s.leg=0;
+    }else{
+      s.plan=planLine(q,s.from,to);
+      if(!s.plan){ /* no continuous joint path keeps the gripper on this line from the current pose */
+        s.note={ru:"MoveL: прямая недостижима, переход по MoveJ",en:"MoveL: the line cannot be followed, moving with MoveJ",c:RED};
+        var f2=q.slice();s.type="J";s.leg=0;
+        s.legs=planJoint(to.q).map(function(b){var a=f2,m=0;for(var k=0;k<M.n;k++)m=Math.max(m,Math.abs(b[k]-a[k]));f2=b;return {a:a,b:b,dur:Math.max(.5,m/1.3),t:0}});
+      }else{
+        s.dur=s.plan.T[s.plan.T.length-1];
+        if(s.plan.hops)s.note={ru:"MoveL: смена конфигурации, схват ненадолго сходит с прямой",en:"MoveL: configuration change, the gripper briefly leaves the line",c:"var(--z-y)"};
+      }
+    }
+    seg=s;
+  }
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+  /* MoveL is planned before the move: the line is cut into ~1.5-unit steps and the IK is solved step by step from the
+     previous pose, so the joint path is continuous and the gripper stays on the line. Each step gets the time its
+     largest joint motion needs at LIN_VJ (and at least the time at LIN_V along the line); playback eases in and out. */
+  var LIN_V=150,LIN_VJ=1.3;
+  function jmax(a,b){var m=0;for(var i=0;i<a.length;i++)m=Math.max(m,Math.abs(a[i]-b[i]));return m}
+  /* redundant arm: dynamic programming over the IK grid along the line, so the arm may change its tool angle and elbow
+     on the way instead of running into its joint limits; cost = joint motion, steps limited to small jumps */
+  function planLineDP(q0,a,b){
+    var L=Math.hypot(b.x-a.x,b.y-a.y),N=Math.max(2,Math.ceil(L/3)),G=M.PHI_N,S=2*G+2,JM=.2,W=3,HOP=8,ALL=[];
+    for(var i0=0;i0<S;i0++)ALL.push(i0);
+    function nb(s2){ /* grid neighbours (same tool angle +-W steps, both elbows) plus the two stretched bridge poses */
+      if(s2>=2*G)return ALL;
+      var j=s2%G,r=[2*G,2*G+1];for(var ee=0;ee<2;ee++)for(var d=-W;d<=W;d++)r.push(ee*G+((j+d+G)%G));return r}
+    /* k = 0: every solution at the start point. Cost to get there from the current pose: self-motion over the grid
+       (the gripper stays put) when connected, otherwise a joint move (HOP penalty, the gripper leaves the point briefly) */
+    var st0=M.ikAll(a),c0=new Array(S).fill(Infinity),p0=new Array(S).fill(-1),done=new Array(S).fill(false),hop=new Array(S).fill(false);
+    for(var s2=0;s2<S;s2++)if(st0[s2]){var j0=jmax(q0,st0[s2]);if(j0<=JM){c0[s2]=j0;p0[s2]=-2}}
+    for(var it=0;it<S;it++){ /* Dijkstra over the start-point grid */
+      var u0=-1,bc=Infinity;for(s2=0;s2<S;s2++)if(!done[s2]&&c0[s2]<bc){bc=c0[s2];u0=s2}
+      if(u0<0)break;done[u0]=true;
+      nb(u0).forEach(function(v){if(!st0[v]||done[v])return;var jp=jmax(st0[u0],st0[v]);if(jp<=JM&&c0[u0]+jp<c0[v]){c0[v]=c0[u0]+jp;p0[v]=u0}});
+    }
+    for(s2=0;s2<S;s2++)if(st0[s2]&&c0[s2]===Infinity&&pathFree(q0,st0[s2])){c0[s2]=HOP+jmax(q0,st0[s2]);hop[s2]=true}
+    var prevSt=st0,prevCost=c0,par=[],sts=[],hopAt=[];
+    for(var k=1;k<=N;k++){
+      var u=k/N,st=M.ikAll(pt(a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u)),cost=new Array(S).fill(Infinity),pr=new Array(S).fill(-1),any=false;
+      for(s2=0;s2<S;s2++){
+        if(!st[s2])continue;
+        var cand=nb(s2);
+        for(var c=0;c<cand.length;c++){
+          var s1=cand[c];if(!prevSt[s1]||prevCost[s1]===Infinity)continue;
+          var jp=jmax(prevSt[s1],st[s2]);if(jp>JM)continue;
+          var v=prevCost[s1]+jp;if(v<cost[s2]){cost[s2]=v;pr[s2]=s1;any=true}
+        }
+      }
+      var hk=null;
+      if(!any){
+        /* no continuous step: the arm has to change its configuration here (e.g. flip the elbow), which takes it off the
+           line for a moment. Allow a joint move from the cheapest previous poses to any collision-free pose here */
+        var order=[];for(s2=0;s2<S;s2++)if(prevSt[s2]&&prevCost[s2]<Infinity)order.push(s2);
+        order.sort(function(x,y){return prevCost[x]-prevCost[y]});order=order.slice(0,12);hk=[];
+        for(s2=0;s2<S;s2++){
+          if(!st[s2])continue;
+          for(c=0;c<order.length;c++){
+            var s1h=order[c],vh=prevCost[s1h]+HOP+jmax(prevSt[s1h],st[s2]);
+            if(vh<cost[s2]&&pathFree(prevSt[s1h],st[s2])){cost[s2]=vh;pr[s2]=s1h;hk[s2]=true;any=true}
+          }
+        }
+        if(!any)return null;
+      }
+      hopAt.push(hk);par.push(pr);sts.push(st);prevSt=st;prevCost=cost;
+    }
+    var best=-1;bc=Infinity;for(s2=0;s2<S;s2++)if(prevCost[s2]<bc){bc=prevCost[s2];best=s2}
+    var line=new Array(N+1),lineHop=new Array(N+1).fill(false),hops=0;
+    for(k=N;k>=1;k--){line[k]=sts[k-1][best];if(hopAt[k-1]&&hopAt[k-1][best]){lineHop[k]=true;hops++}best=par[k-1][best]}
+    line[0]=st0[best];
+    /* lead-in: self-motion chain or a joint hop from q0 to the chosen start pose */
+    var lead=[q0.slice()];
+    if(hop[best]){var m=jmax(q0,st0[best]),n=Math.max(1,Math.ceil(m/.05));for(var h=1;h<n;h++)lead.push(lerpQ(q0,st0[best],h/n))}
+    else{var chain=[],x=best;while(x>=0){chain.unshift(st0[x]);x=p0[x]}chain.pop();lead=lead.concat(chain)}
+    /* smooth the tool angle along each continuous run (same elbow, no reconfiguration), keeping only valid small steps */
+    function phiOf(x){return x[0]+x[1]+x[2]}
+    function elb(x){return x[1]<0?1:0}
+    function onLineP(t){return pt(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t)}
+    for(var pass2=0;pass2<3;pass2++)for(k=1;k<N;k++){
+      if(lineHop[k]||lineHop[k+1]||Math.abs(line[k][1])<.05)continue;
+      var e1=elb(line[k]);if(elb(line[k-1])!==e1||elb(line[k+1])!==e1)continue;
+      var ph=(phiOf(line[k-1])+2*phiOf(line[k])+phiOf(line[k+1]))/4,cq=M.ikPhi(onLineP(k/N),ph,e1);
+      if(cq&&jmax(cq,line[k-1])<=JM&&jmax(cq,line[k+1])<=JM)line[k]=cq;
+    }
+    /* densify the line part: between samples the pose is re-solved on the line (tool angle interpolated), so the
+       gripper does not bow off it; reconfiguration steps stay plain joint moves */
+    var dense=[line[0]];
+    for(k=1;k<=N;k++){
+      var jj=jmax(line[k-1],line[k]),nsub=Math.max(1,Math.ceil(jj/.02));
+      for(var h2=1;h2<nsub;h2++){
+        var f=h2/nsub,sd=lerpQ(line[k-1],line[k],f);
+        if(lineHop[k]){dense.push(sd);continue} /* the reconfiguration itself is a plain joint move */
+        var tp=onLineP((k-1+f)/N),ea=elb(line[k-1]),eb=elb(line[k]),aq=null;
+        if(ea===eb){var p0=phiOf(line[k-1]),p1=phiOf(line[k]);aq=M.ikPhi(tp,p0+(p1-p0)*f,ea)}
+        if(aq&&jmax(aq,sd)<.1){dense.push(aq);continue}
+        var rr=ikFrom(sd,tp,20,false,16);
+        dense.push(rr.err<.5&&!check(rr.q)&&jmax(rr.q,sd)<.1?rr.q:sd);
+      }
+      dense.push(line[k]);
+    }
+    var qs=lead.concat(dense),T=[0],nl=lead.length,dsTot=L/LIN_V;
+    for(k=1;k<qs.length;k++)T.push(T[k-1]+Math.max(k>=nl?dsTot/(dense.length-1):0,jmax(qs[k-1],qs[k])/LIN_VJ));
+    var tot=Math.max(.6,T[T.length-1]),T1=T[T.length-1];for(k=0;k<T.length;k++)T[k]*=tot/Math.max(T1,1e-9);
+    return {qs:qs,T:T,hop:hop[best],hops:hops};
+  }
+  function planLine(q0,a,b){
+    if(M.ikAll)return planLineDP(q0,a,b);
+    var L=Math.hypot(b.x-a.x,b.y-a.y),N=Math.max(2,Math.ceil(L/1.5)),qs=[q0.slice()],T=[0],prev=q0;
+    for(var k=1;k<=N;k++){
+      var u=k/N,tp=pt(a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u),r=ikFrom(prev,tp,80,false,16),jump=0;
+      if(M.n>2&&r.err<.8){var r2=ikFrom(r.q,tp,4,true,16);if(r2.err<.8&&!check(r2.q))r=r2} /* redundant arm: keep drifting away from the joint limits */
+      for(var i=0;i<M.n;i++)jump=Math.max(jump,Math.abs(r.q[i]-prev[i]));
+      if(r.err>.8||check(r.q)||jump>.25)return null;
+      T.push(T[k-1]+Math.max(L/N/LIN_V,jump/LIN_VJ));qs.push(r.q);prev=r.q;
+    }
+    var tot=Math.max(.6,T[N]);for(k=0;k<=N;k++)T[k]*=tot/Math.max(T[N],1e-9);
+    return {qs:qs,T:T};
+  }
+  function stepProgram(dt){
+    if(seg.type==="J"){
+      var leg=seg.legs[seg.leg];leg.t=Math.min(1,leg.t+dt/leg.dur);
+      var nq=lerpQ(leg.a,leg.b,ease(leg.t));if(!check(nq))q=nq;
+      if(leg.t>=1){if(++seg.leg>=seg.legs.length)nextSeg(seg.i+1)}
+      return;
+    }
+    seg.t=Math.min(1,seg.t+dt/seg.dur);
+    var P=seg.plan,tau=ease(seg.t)*seg.dur,k=1;
+    while(k<P.T.length-1&&P.T[k]<tau)k++;
+    var f=(tau-P.T[k-1])/Math.max(P.T[k]-P.T[k-1],1e-9),nq=lerpQ(P.qs[k-1],P.qs[k],Math.max(0,Math.min(1,f)));
+    if(!check(nq))q=nq;
+    if(seg.t>=1)nextSeg(seg.i+1);
+  }
+  document.querySelectorAll("[data-move]").forEach(function(b){
+    b.addEventListener("click",function(e){
+      e.stopPropagation();moveType=b.dataset.move;
+      document.querySelectorAll("[data-move]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});
+      if(running)nextSeg(seg?seg.i:0);
+    });
+  });
+  $("run").addEventListener("click",function(e){e.stopPropagation();setRunning(!running)});
+  $("clear").addEventListener("click",function(e){e.stopPropagation();setRunning(false);wps=[];renderWps()});
+  $("pendant").addEventListener("pointerdown",function(e){e.stopPropagation()});
+
+  /* ---------- kinematics switch ---------- */
+  function setModel(id,animate){
+    var g=$("armg");
+    function apply(){
+      M=MODELS[id];buildToken++;q=M.q0.slice();qd=q.slice();manQ=manP=null;clearPend();parked=false;
+      setRunning(false);wps=[];renderWps();reconf=null;idle=null;demo=null;blocked=false;trail=[];
+      reach=null;reachList=[];$("noreach").setAttribute("opacity","0");
+      g.innerHTML="";drawModel=M.build(g);buildGauges(g);
+      q=M.q0.slice();qd=q.slice();draw();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);
+      document.querySelectorAll("[data-kin]").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.kin===id))});
+      svg.setAttribute("aria-label",T(M.title.ru,M.title.en));
+      var tk=buildToken;setTimeout(function(){buildWorkspace(tk)},30);
+      g.style.opacity="1";
+    }
+    if(animate&&!reduce){g.style.opacity="0";setTimeout(apply,220)}else apply();
+  }
+  document.querySelectorAll("[data-kin]").forEach(function(b){
+    var t=MODELS[b.dataset.kin].title;b.title=T(t.ru,t.en);b.setAttribute("aria-label",T(t.ru,t.en));
+    b.addEventListener("click",function(e){e.stopPropagation();if(M.id!==b.dataset.kin){setModel(b.dataset.kin,true);say(M.title.ru,M.title.en)}});
+  });
+  $("kin").addEventListener("pointerdown",function(e){e.stopPropagation()});
+  (function(){var b=$("gaugeBtn"),t=T("Шкалы углов в шарнирах","Joint angle dials");b.title=t;b.setAttribute("aria-label",t);b.setAttribute("aria-pressed",String(showGauges));
+    b.addEventListener("click",function(e){e.stopPropagation();setGauges(!showGauges)})})();
+
+  /* ---------- input ---------- */
+  function toSvg(e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+  function showTarget(p){var tg=$("target");tg.setAttribute("transform","translate("+p.x+" "+p.y+")");tg.setAttribute("opacity","1")}
+  function inPanel(p){return pt(Math.max(0,Math.min(520,p.x)),Math.max(0,Math.min(520,p.y)))}
+  /* Tracking is armed when the pointer enters the arm panel (#cell). The mouse steers only inside the panel and above
+     the floor; when it leaves the panel or goes below the floor the arm slowly returns to its zero pose. A touch or mouse
+     drag that started in the panel keeps steering wherever it goes. The demo disarms tracking. */
+  var inside=false,engaged=false,press=null;
+  function stopReconf(){if(reconf){reconf=null;qd=q.slice()}} /* continue tracking from the pose the arm is actually in */
+  function inCellEl(e){return !!(e.target&&e.target.closest&&e.target.closest("#cell"))}
+  /* the strip of the panel below the floor holds the readout and the ruler: it does not steer the arm */
+  function belowFloor(e,p){return inCellEl(e)&&p.y>FLOOR_Y}
+  /* when the mouse leaves the panel or goes below the floor, the arm slowly returns to its zero pose (every joint at 0°) */
+  var parked=false; /* resting in the zero pose: no singularity notice for it */
+  function homeQ(){var z=[];for(var i=0;i<M.n;i++)z.push(zero(i));return z}
+  function startHome(){
+    $("target").setAttribute("opacity","0");flagBad(false);
+    if(hold||running||press||idle||(reconf&&reconf.home))return;
+    var z=homeQ(),dm=0;for(var i=0;i<M.n;i++)dm=Math.max(dm,Math.abs(z[i]-q[i]));
+    if(dm<.5*D||check(z)){parked=dm<.5*D;return}
+    reconf={legs:planJoint(z).map(function(b){return {b:b}}),stuck:0,home:true};
+  }
+  function steer(e){
+    var p=toSvg(e);lastMove=performance.now();if(hold)return p;
+    if(belowFloor(e,p)&&!press){startHome();return p}
+    if(reconf&&reconf.home){reconf=null;qd=q.slice();cur=pt(TCP.x,TCP.y)} /* the pointer is back: take over from where the arm is */
+    parked=false;showTarget(p);
+    flagBad(inCellEl(e)&&!reachable(p));
+    if(!running){var g=inPanel(p);if(Math.hypot(g.x-goal.x,g.y-goal.y)>2){stillSince=performance.now();stopReconf()}goal=g}
+    return p;
+  }
+  cell.addEventListener("pointerenter",function(e){if(e.pointerType==="mouse"){inside=true;engaged=true}});
+  cell.addEventListener("pointerleave",function(e){if(e.pointerType==="mouse"){inside=false;if(engaged)startHome()}});
+  hero.addEventListener("pointerleave",function(e){inside=false;if(e.pointerType==="mouse"&&!hold){$("target").setAttribute("opacity","0");flagBad(false)}});
+  hero.addEventListener("pointermove",function(e){
+    if(e.pointerType!=="mouse"&&!press)return;
+    if(e.pointerType==="mouse"&&inCellEl(e)){inside=true;engaged=true} /* pointer already inside the panel when the page loads */
+    if(!engaged)return;
+    if(e.pointerType==="mouse"&&!press&&!inCellEl(e))return; /* outside the panel the mouse does not steer (the arm is going home) */
+    steer(e);
+    if(press&&Math.hypot(e.clientX-press.x,e.clientY-press.y)>10)press.drag=true;
+  });
+  cell.addEventListener("pointerdown",function(e){
+    if(belowFloor(e,toSvg(e)))return;
+    press={x:e.clientX,y:e.clientY,t:performance.now(),drag:false,man:hold};engaged=true;
+    try{cell.setPointerCapture(e.pointerId)}catch(_){}
+    steer(e);
+  });
+  function release(e){
+    if(!press)return;
+    var tap=!press.drag&&performance.now()-press.t<450,man=press.man;press=null;
+    if(tap&&e.type==="pointerup"){if(man){if(hold&&!running)setTcpMm(toMm(toSvg(e)))}else addPoint(toSvg(e))}
+    lastMove=performance.now();
+  }
+  cell.addEventListener("pointerup",release);
+  cell.addEventListener("pointercancel",release);
+  var kbdMsg=T("Стрелки двигают схват, с Shift быстрее, Enter ставит точку, Esc сбрасывает","Arrows move the gripper, Shift is faster, Enter adds a point, Esc clears");
+  cell.addEventListener("focus",function(){var kb=true;try{kb=cell.matches(":focus-visible")}catch(_){}if(kb&&!wps.length&&!running)$("msg").textContent=kbdMsg});
+  cell.addEventListener("blur",function(){if(!wps.length&&!running)$("msg").innerHTML=msgDefault;if(hold)$("msg").textContent=holdTxt()});
+  cell.addEventListener("keydown",function(e){
+    if(e.target!==cell)return;
+    var step=e.shiftKey?18:5,dx=0,dy=0;
+    if(e.key==="ArrowLeft")dx=-step;else if(e.key==="ArrowRight")dx=step;else if(e.key==="ArrowUp")dy=-step;else if(e.key==="ArrowDown")dy=step;
+    if(dx||dy){
+      e.preventDefault();if(running)return;
+      if(hold){var mm=manP||toMm(TCP),k=e.shiftKey?10:1;setTcpMm({x:mm.x+Math.sign(dx)*k,y:mm.y-Math.sign(dy)*k});return}
+      engaged=true;goal=inPanel(pt(goal.x+dx,goal.y+dy));stillSince=performance.now();stopReconf();lastMove=performance.now();
+      showTarget(goal);flagBad(!reachable(goal));
+    }else if(e.key==="Enter"){e.preventDefault();if(hold)addPoint(pt(TCP.x,TCP.y),q);else addPoint(pt(goal.x,goal.y));lastMove=performance.now()}
+    else if(e.key==="Escape"){setRunning(false);wps=[];renderWps();$("msg").textContent=kbdMsg}
+  });
+
+  /* ---------- demo: random reachable points, random poses, Catmull-Rom spline in joint space ---------- */
+  var demo=null;
+  function nextKnot(prevQ){
+    var from=M.tcp(prevQ);
+    for(var tries=0;tries<80;tries++){
+      var c=reachList[Math.floor(Math.random()*reachList.length)],p=pt((c%GW+.5)*CELL,(Math.floor(c/GW)+.5)*CELL);
+      var dd=Math.hypot(p.x-from.x,p.y-from.y);if(dd<M.hops[0]||dd>M.hops[1])continue;
+      var sol=ikFrom(M.seed(),p,90);
+      if(sol.err>1.5||check(sol.q)||!pathFree(prevQ,sol.q))continue;
+      return sol.q;
+    }
+    return null;
+  }
+  function segDur(a,b){var m=0;for(var i=0;i<M.n;i++)m=Math.max(m,Math.abs(b[i]-a[i]));return Math.max(.9,m/1.25)}
+  function startDemo(){var k=nextKnot(q)||q.slice();demo={k:[q.slice(),q.slice(),k,nextKnot(k)||k],t:0};demo.dur=segDur(demo.k[1],demo.k[2])}
+  function stepDemo(dt){
+    demo.t+=dt/demo.dur;
+    while(demo.t>=1){demo.t-=1;demo.k.shift();demo.k.push(nextKnot(demo.k[2])||demo.k[2].slice());demo.dur=segDur(demo.k[1],demo.k[2])}
+    var t=demo.t,t2=t*t,t3=t2*t,K=demo.k,nq=[],lin=[];
+    for(var i=0;i<M.n;i++){
+      nq.push(.5*((2*K[1][i])+(-K[0][i]+K[2][i])*t+(2*K[0][i]-5*K[1][i]+4*K[2][i]-K[3][i])*t2+(-K[0][i]+3*K[1][i]-3*K[2][i]+K[3][i])*t3));
+      lin.push(K[1][i]+(K[2][i]-K[1][i])*t*t*(3-2*t));
+    }
+    clampQ(nq);
+    if(!check(nq))q=nq;else if(!check(lin))q=lin;
+  }
+
+  /* ---------- manual input: joint angles and TCP coordinates typed into the readout ---------- */
+  var hold=false,manQ=null,manP=null;
+  /* manual mode is explicit (button in the toolbar, or focusing a readout field turns it on): the arm never follows
+     the pointer, a tap on the panel moves the gripper there, the demo does not start; the same button turns it off */
+  function holdTxt(){
+    var touch=window.matchMedia("(pointer:coarse)").matches;
+    return touch?T("Ручной режим: введите значения внизу или коснитесь точки на панели","Manual mode: type values below or tap a point on the panel")
+                :T("Ручной режим: введите значения внизу или щёлкните точку на панели","Manual mode: type values below or click a point on the panel");
+  }
+  function syncMan(){$("manBtn").setAttribute("aria-pressed",String(hold));cell.classList.toggle("manual",hold)}
+  function enterHold(){
+    if(running)return;
+    var m=$("msg");
+    if(hold)return; /* already held: keep a manual move that is under way */
+    hold=true;manQ=manP=null;clearPend();syncMan();
+    reconf=null;demo=null;idle=null;qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);
+    $("target").setAttribute("opacity","0");flagBad(false);clearTimeout(msgTimer);m.classList.remove("warn");m.textContent=holdTxt();
+  }
+  function releaseHold(){
+    hold=false;manQ=manP=null;clearPend();reconf=null;qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);syncMan();
+    $("target").setAttribute("opacity","0");flagBad(false);
+    var m=$("msg");clearTimeout(msgTimer);m.classList.remove("warn");m.innerHTML=wps.length?"":msgDefault;
+  }
+  function num(s){var v=parseFloat(String(s).replace(/[\u2212\u2013]/g,"-").replace(",",".").replace(/[^0-9.+-]/g,""));return isFinite(v)?v:NaN}
+  function whyNot(c){
+    if(c===1)return (T("параллелограмм не допускает такого угла между звеньями","the parallelogram does not allow this angle between the links"));
+    if(c===2)return (T("звено или схват уходит в пол","a link or the gripper would hit the floor"));
+    if(c===4)return (T("звено задевает основание","a link would hit the base"));
+    return (T("звенья сталкиваются или механизм вырождается","the links collide or the mechanism degenerates"));
+  }
+  function moveTo(tq){reconf={legs:planJoint(tq).map(function(b){return {b:b}}),stuck:0}}
+  function setJoint(i,v){
+    var lo=(M.LIM[i][0]-zero(i))/D,hi=(M.LIM[i][1]-zero(i))/D,J="J"+(i+1);
+    if(v<lo-.5||v>hi+.5){
+      v=Math.max(lo,Math.min(hi,v));
+      say(J+": допустимо от "+fmt(lo)+"° до "+fmt(hi)+"°",J+": allowed range is "+fmt(lo)+"° to "+fmt(hi)+"°",true);
+    }
+    var tq=(manQ||q).slice(),clip=function(k,a){return Math.max(M.LIM[k][0],Math.min(M.LIM[k][1],a*D+zero(k)))};
+    pendJ[i]=v;for(var k=0;k<M.n;k++)if(pendJ[k]!==undefined)tq[k]=clip(k,pendJ[k]);
+    var c=check(tq);
+    if(c){ /* keep the value as pending: the pose may become valid once another angle is changed too */
+      var w=whyNot(c);markPend("#a"+(i+1),true);
+      say("Пока нельзя: "+w+". Измените другой угол","Not yet: "+w+". Change another angle",true);return;
+    }
+    clearPend();manQ=tq;manP=null;moveTo(tq);
+  }
+  function setTcp(ax,v){
+    var base=manP||toMm(TCP),mm={x:pendP.x!==undefined?pendP.x:base.x,y:pendP.y!==undefined?pendP.y:base.y};mm[ax]=v;
+    if(setTcpMm(mm,true))return;
+    /* the point (new value, other coordinate) is out of reach: keep the value as pending and go to the other field */
+    pendP[ax]=v;markPend(ax==="x"?"#tx":"#ty",true);
+    var other=ax==="x"?"y":"x";
+    if(pendP[other]===undefined){var o=$(ax==="x"?"ty":"tx");setTimeout(function(){o.focus();try{o.select()}catch(_){}},0)}
+    say("Точка X "+fmt(mm.x)+", Y "+fmt(mm.y)+" вне зоны досягаемости. Задайте "+other.toUpperCase(),"Point X "+fmt(mm.x)+", Y "+fmt(mm.y)+" is out of reach. Set "+other.toUpperCase(),true);
+  }
+  /* values typed but not executed yet (they make an invalid pose on their own) */
+  var pendJ={},pendP={};
+  function markPend(sel,on){var e=document.querySelector(sel);if(e)e.classList.toggle("pending",on)}
+  function clearPend(){pendJ={};pendP={};document.querySelectorAll("#readout .pending").forEach(function(e){e.classList.remove("pending")})}
+  function setTcpMm(mm,quiet){
+    var p=fromMm(mm);
+    showTarget(p);
+    if(!reachable(p)){flagBad(true);if(!quiet)say("Точка вне зоны досягаемости","This point is out of reach",true);return false}
+    flagBad(false);
+    /* several IK solutions (from the current pose, from the reach map, from random seeds); take the first one
+       the arm can move to without a collision, directly or through HOME */
+    var seeds=[manQ||q,cellCfg(p)],sols=[],best=null;
+    for(var i=0;i<12;i++)seeds.push(M.seed());
+    for(i=0;i<seeds.length&&!best;i++){
+      if(!seeds[i])continue;
+      var r=ikFrom(seeds[i],p,150);if(r.err>=2||check(r.q))continue;
+      if(M.n>2){var rest=ikFrom(r.q,p,240,true);if(rest.err<2&&!check(rest.q))r=rest}
+      sols.push(r.q);
+      if(pathFree(q,r.q)||(pathFree(q,M.HOME)&&pathFree(M.HOME,r.q)))best=r.q;
+    }
+    if(!best&&sols.length)best=sols[0];
+    if(!best){flagBad(true);if(!quiet)say("Манипулятор не дотягивается до этой точки","The arm cannot reach this point",true);return false}
+    clearPend();manP=mm;manQ=best;moveTo(best);return true;
+  }
+  function applyInput(inp){
+    if(running||inp.readOnly)return;
+    var v=num(inp.value);inp._applied=inp.value;
+    if(isNaN(v)){say("Введите число","Enter a number",true);return}
+    if(!hold)enterHold();
+    if(inp.dataset.j!==undefined)setJoint(+inp.dataset.j,v);else setTcp(inp.dataset.ax,v);
+    lastMove=performance.now();
+  }
+  $("readout").addEventListener("pointerdown",function(e){if(e.target.closest&&e.target.closest("label"))e.stopPropagation()});
+  (function(){var b=$("manBtn"),t=T("Ручное управление: углы и координаты","Manual control: angles and coordinates");b.title=t;b.setAttribute("aria-label",t);
+    b.addEventListener("click",function(e){e.stopPropagation();if(hold)releaseHold();else if(!running)enterHold()})})();
+  $("addPt").addEventListener("click",function(e){e.stopPropagation();if(hold&&!running)addPoint(pt(TCP.x,TCP.y),q)});
+
+  /* ---------- scale ruler on the floor (X) and at the right edge (Y), in real millimetres ---------- */
+  function updateScale(){
+    var c=svg.getScreenCTM();if(!c||!(c.a>0))return;
+    var k=c.a/PX_MM;if(Math.abs(k-MMU)<1e-4&&$("ruler").childNodes.length)return;
+    MMU=k;manP=null;drawRuler();
+  }
+  function drawRuler(){
+    var g=$("ruler");g.innerHTML="";
+    var u=1/(MMU*PX_MM),fs=10*u,tk=[3*u,5*u,8*u],d=["","",""],X0=40,X1=480,YT=120;
+    for(var mm=Math.ceil((X0-ORIGIN.x)*MMU);mm<=(X1-ORIGIN.x)*MMU;mm++){
+      var x=(ORIGIN.x+mm/MMU).toFixed(2),c=mm%10===0?2:mm%5===0?1:0;
+      d[c]+="M"+x+" "+FLOOR_Y+"v"+(-tk[c]).toFixed(2);
+      if(c===2&&mm!==0){var t=mk("text",{x:x,y:(FLOOR_Y-tk[2]-2*u).toFixed(2),"font-size":fs.toFixed(2),"text-anchor":"middle",stroke:"none"},g);t.textContent=String(mm)}
+    }
+    for(mm=1;mm<=(FLOOR_Y-YT)*MMU;mm++){
+      var y=(FLOOR_Y-mm/MMU).toFixed(2);c=mm%10===0?2:mm%5===0?1:0;
+      d[c]+="M"+X1+" "+y+"h"+(-tk[c]).toFixed(2);
+      if(c===2){t=mk("text",{x:(X1-tk[2]-2*u).toFixed(2),y:(+y+3.5*u).toFixed(2),"font-size":fs.toFixed(2),"text-anchor":"end",stroke:"none"},g);t.textContent=String(mm)}
+    }
+    var ytop=FLOOR_Y-Math.floor((FLOOR_Y-YT)*MMU)/MMU;
+    mk("path",{d:"M"+X1+" "+FLOOR_Y+"V"+ytop.toFixed(2),"stroke-width":(1*u).toFixed(2),fill:"none",opacity:.6},g);
+    [.6,.75,1].forEach(function(o,i){mk("path",{d:d[i],"stroke-width":(1*u).toFixed(2),fill:"none",opacity:o*.7},g)});
+    var lx=mk("text",{x:X0,y:(FLOOR_Y-tk[2]-15*u).toFixed(2),"font-size":fs.toFixed(2),stroke:"none"},g);lx.textContent=T("X, мм","X, mm");
+    var ly=mk("text",{x:X1,y:(ytop-5*u).toFixed(2),"font-size":fs.toFixed(2),"text-anchor":"end",stroke:"none"},g);ly.textContent=T("Y, мм","Y, mm");
+    g.setAttribute("opacity",".85");
+  }
+  /* the ruler is hidden on every page load and shown only after the visitor presses the button (the choice is not remembered) */
+  (function(){var b=$("rulerBtn"),t=T("Линейки, мм","Rulers, mm");b.title=t;b.setAttribute("aria-label",t);
+    b.addEventListener("click",function(e){e.stopPropagation();var on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));$("ruler").style.display=on?"":"none"})})();
+  if(window.ResizeObserver)new ResizeObserver(updateScale).observe(cell);
+  window.addEventListener("resize",updateScale);
+  document.querySelectorAll("#readout .man").forEach(function(inp){
+    var j=inp.dataset.j,name=j!==undefined?"J"+(+j+1):inp.dataset.ax.toUpperCase();
+    var t=j!==undefined?T("Угол "+name+", градусы. Enter — переместить, Esc — отмена","Joint "+name+" angle, degrees. Enter moves, Esc cancels")
+                       :T("Координата "+name+" схвата, мм. Enter — переместить, Esc — отмена","Gripper "+name+" coordinate, mm. Enter moves, Esc cancels");
+    inp.title=t;inp.setAttribute("aria-label",t);
+    inp.addEventListener("focus",function(){inp._applied=null;if(!running){enterHold();setTimeout(function(){try{inp.select()}catch(_){}},0)}});
+    inp.addEventListener("keydown",function(e){
+      e.stopPropagation();
+      if(e.key==="Enter"){e.preventDefault();applyInput(inp);inp.select()}
+      else if(e.key==="Escape"){e.preventDefault();if(inp.classList.contains("pending")){inp.classList.remove("pending");if(inp.dataset.j!==undefined)delete pendJ[inp.dataset.j];else delete pendP[inp.dataset.ax]}inp._applied=inp.value;inp.blur()} /* blur without applying; draw() restores the live value */
+      else if(e.key==="ArrowUp"||e.key==="ArrowDown"){ /* step the value: 1 (Shift: 10) per press */
+        e.preventDefault();var v=num(inp.value);if(isNaN(v))return;
+        inp.value=fmt(v+(e.key==="ArrowUp"?1:-1)*(e.shiftKey?10:1));applyInput(inp);
+      }
+    });
+    inp.addEventListener("change",function(){if(inp.value!==inp._applied)applyInput(inp)});
+  });
+
+  /* ---------- main loop ---------- */
+  setModel("serial",false);updateScale();
+  var t0=performance.now(),prev=t0;
+  (function tick(now){
+    var dt=Math.min(.05,(now-prev)/1000);prev=now;
+    if(running){blocked=false;stepProgram(dt)}
+    else{
+      var quiet=!hold&&!inside&&!press&&document.activeElement!==cell&&now-lastMove>(lastMove<0?1500:IDLE_MS)&&!wps.length&&!reduce;
+      if(quiet&&reachList.length){
+        if(!idle){idle={t:now};startDemo();reconf=null;engaged=false;$("target").setAttribute("opacity","0");flagBad(false)}
+        stepDemo(dt);qd=q.slice();draw();cur=pt(TCP.x,TCP.y);goal=pt(cur.x,cur.y);blocked=false;
+        drawTrail(now);requestAnimationFrame(tick);return;
+      }
+      idle=null;
+      var k=reduce?1:1-Math.exp(-TRACK_RATE*dt); /* same feel at 60 and 120 Hz */
+      if(!hold){cur.x+=(goal.x-cur.x)*k;cur.y+=(goal.y-cur.y)*k}
+      if(hold){
+        /* manual input: the arm holds its pose and only moves to the entered joint angles or TCP */
+        if(reconf){
+          var hl=reconf.legs[0];
+          if(!hl.a){hl.a=q.slice();var hm=0;for(var hi=0;hi<M.n;hi++)hm=Math.max(hm,Math.abs(hl.b[hi]-hl.a[hi]));hl.dur=reduce?0:Math.max(.35,hm/.9);hl.t=0}
+          hl.t=hl.dur?Math.min(1,hl.t+dt/hl.dur):1;
+          var hq=lerpQ(hl.a,hl.b,ease(hl.t));
+          if(!check(hq))q=hq;else reconf.stuck++;
+          if(hl.t>=1){reconf.legs.shift();if(!reconf.legs.length)reconf=null}
+          if(reconf&&reconf.stuck>30){reconf=null;say("Не получается пройти: на пути столкновение","Cannot get there: the path collides",true)}
+          if(!reconf){qd=q.slice();var hp=M.tcp(q);cur=pt(hp.x,hp.y);goal=pt(hp.x,hp.y)}
+        }
+        blocked=false;
+      }else if(reconf){
+        var home0=!!reconf.home;
+        /* all joints start and stop together with smooth acceleration (like MoveJ); the leg ends exactly on its target */
+        var leg=reconf.legs[0];
+        if(!leg.a){leg.a=q.slice();var dm=0;for(var i=0;i<M.n;i++)dm=Math.max(dm,Math.abs(leg.b[i]-leg.a[i]));leg.dur=reduce?0:reconf.home?Math.max(1,dm/.45):Math.max(.35,dm/.8);leg.t=0} /* going home is slow */
+        leg.t=leg.dur?Math.min(1,leg.t+dt/leg.dur):1;
+        var nq=lerpQ(leg.a,leg.b,ease(leg.t));
+        if(!check(nq))q=nq;else reconf.stuck++;
+        if(leg.t>=1){reconf.legs.shift();if(!reconf.legs.length)reconf=null}
+        if(!reconf||reconf.stuck>30){reconf=null;qd=q.slice();var tp=M.tcp(q);cur=pt(tp.x,tp.y);if(home0){goal=pt(tp.x,tp.y);parked=true}}
+        blocked=false;
+      }else{
+        var r=ikFrom(qd,cur,reduce?120:12);qd=r.q;
+        drive(qd,dt,TRACK_VMAX);
+        blocked=r.err>6&&!reachable(goal);
+        if(r.err>4&&reachable(goal)&&now-stillSince>700&&Math.hypot(cur.x-goal.x,cur.y-goal.y)<2){
+          var c=cellCfg(goal);
+          if(c){
+            var sol=ikFrom(c,goal,150);
+            if(sol.err<2){var rest=ikFrom(sol.q,goal,240,true);if(rest.err<2&&!check(rest.q))sol=rest}
+            if(sol.err<2)reconf={legs:planJoint(sol.q).map(function(b){return {b:b}}),stuck:0};
+          }
+        }
+      }
+    }
+    draw();drawTrail(now);
+    requestAnimationFrame(tick);
+  })(t0);
+})();
+</script>
+</body>
+</html>
