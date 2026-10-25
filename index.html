@@ -135,7 +135,7 @@ h1 span{display:block}
 @media (pointer:coarse){.touch-only{display:inline}.mouse-only{display:none}}
 
 /* teach pendant strip */
-.pendant{position:absolute;left:16px;right:278px;top:14px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;color:var(--steel)}
+.pendant{position:absolute;left:16px;right:319px;top:14px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;color:var(--steel)}
 .pendant .msg{padding:4px 4px}
 .pendant .msg.warn{color:#C2413A}
 .pendant .msg.note{color:var(--z-y)}
@@ -149,7 +149,38 @@ h1 span{display:block}
 .cell.has-points .pendant .ctl{display:flex}
 .pendant .addpt{display:none}
 .cell.manual .pendant .addpt{display:inline-block}
-@media (max-width:520px){.pendant{top:58px;right:52px}}
+/* path mode: the drawn line replaces the program points; pen and speed controls appear */
+.cell.path-mode .pendant .ctl{display:flex}
+.cell.path-mode #wps,.cell.path-mode #path{display:none}
+.cell.path-mode .pendant .msg{flex:1 0 100%;min-height:3.9em} /* three lines (two on a phone) are always reserved, so the buttons below never jump when the text changes */
+.cell:not(.path-mode) #draw{display:none}
+/* only the buttons and the slider catch the pointer; the hint and the gaps between them let the line be started under them */
+.cell.path-mode .pendant{pointer-events:none}
+.cell.path-mode .pendant button,.cell.path-mode .pendant .spd{pointer-events:auto}
+.pendant{transition:opacity .15s}
+.cell.drawing .pendant{opacity:.2} /* while a line is being drawn the controls fade, so the line is seen under them */
+.pendant .pathctl{display:none;align-items:center;gap:8px}
+.cell.path-mode .pendant .pathctl{display:inline-flex}
+.pendant .pen[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pendant .spd{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.pendant .spd input{width:72px;margin:0;accent-color:var(--ink);cursor:pointer}
+.pendant .spd output{font-variant-numeric:tabular-nums;min-width:2.2ch;text-align:right}
+@media (max-width:520px){.pendant{top:54px;left:12px;right:12px;gap:6px 8px;font-size:13px;line-height:1.3}.pendant button{font-size:13px;padding:5px 8px}}
+/* phones, path mode: the panel grows by a strip above the drawing, so the controls sit in it and never cover the arm or the line */
+@media (max-width:520px){
+  .cell.path-mode{aspect-ratio:auto;height:calc((100vw - 32px)*.7692 + 160px);container-type:inline-size} /* the drawing is cropped to 520×400 units (top 120 cut; the reach never goes above y=161), the controls overlap its empty top band */
+  .cell.path-mode svg#arm{position:absolute;left:0;bottom:0;height:auto}
+  .cell.path-mode .status{display:none} /* the same note is already in the line at the top, and here it would lie over the arm */
+  .cell.path-mode .pendant .msg{padding:0 4px;min-height:2.8em}
+  .cell.path-mode .pendant .ctl{flex:1 0 100%;gap:6px 8px}
+  .cell.path-mode .pendant .pathctl{flex:1 1 100%;gap:8px}
+  .cell.path-mode .pendant .spd{flex:1;min-width:0}
+  .cell.path-mode .pendant .spd input{flex:1;width:auto;min-width:60px}
+  .cell.path-mode .pendant .spd output{min-width:2.4ch}
+}
+
+/* touch: bigger targets for the path controls */
+@media (pointer:coarse){.cell.path-mode .pendant button{min-height:34px}.cell.path-mode .pendant .spd input{height:30px;min-width:60px}}
 
 /* sections */
 section{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px 48px;padding:56px 0;border-top:1px solid var(--rule)}
@@ -277,7 +308,7 @@ html[lang="en"] [data-en]{display:revert!important}
 </div>
 </div>
 <div aria-describedby="kbdHelp" class="cell" id="cell" tabindex="0">
-<p class="sr-only" id="kbdHelp"><span>Управление с клавиатуры: стрелки двигают схват, с Shift быстрее, Enter ставит точку программы, Esc сбрасывает программу. В ручном режиме стрелки сдвигают схват на 1 мм, с Shift на 10 мм; углы и координаты вводятся в поля под панелью.</span></p>
+<p class="sr-only" id="kbdHelp"><span>Управление с клавиатуры: стрелки двигают схват, с Shift быстрее, Enter ставит точку программы, Esc сбрасывает программу. В ручном режиме стрелки сдвигают схват на 1 мм, с Shift на 10 мм; углы и координаты вводятся в поля под панелью. В режиме «Путь» линию рисуют мышью или пальцем, Esc стирает её.</span></p>
 <svg aria-label="Робот-манипулятор следует за курсором" id="arm" role="img" viewbox="0 0 520 520">
 <g fill="none">
 <defs>
@@ -293,6 +324,7 @@ html[lang="en"] [data-en]{display:revert!important}
 <line stroke="var(--steel)" stroke-width="2" x1="40" x2="480" y1="440" y2="440"></line>
 <g fill="var(--steel)" id="ruler" stroke="var(--steel)" style="display:none"></g>
 <g id="path"></g>
+<g id="draw"></g>
 <g id="trail" stroke="var(--link)" stroke-linecap="round"></g>
 <g id="wps"></g>
 <g id="target" opacity="0" stroke="var(--steel)" stroke-width="1.5">
@@ -306,6 +338,7 @@ html[lang="en"] [data-en]{display:revert!important}
 <button aria-pressed="false" class="tog" id="gaugeBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M6 21a10 10 0 0 1 20 0" stroke-width="2.4"></path><path d="M16 21 L22 13" stroke-width="2.4"></path><circle cx="16" cy="21" fill="currentColor" r="2.2" stroke="none"></circle><path d="M6 21h2.5M23.5 21H26" stroke-width="2"></path></svg></button>
 <button aria-pressed="false" class="tog" id="rulerBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M3 20 L20 3 L29 12 L12 29 Z" stroke-width="2.2"></path><path d="M7.5 15.5l2.5 2.5M11 12l1.8 1.8M14.5 8.5l2.5 2.5M18 5l1.8 1.8" stroke-width="2"></path></svg></button>
 <button aria-pressed="false" class="tog" id="manBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><rect height="15" rx="3" stroke-width="2.2" width="24" x="4" y="9"></rect><path d="M9 14h1.5M15 14h1.5M21 14h1.5M10 19h12" stroke-width="2.2"></path></svg></button>
+<button aria-pressed="false" class="tog" id="pathBtn" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M6 26 L7.5 20 L21 6.5 Q23 4.5 25.5 7 Q28 9.5 26 11.5 L12.5 25 Z" stroke-width="2.2"></path><path d="M19 9 L23.5 13.5" stroke-width="2"></path></svg></button>
 <span aria-hidden="true" class="sep"></span>
 <button aria-pressed="true" data-kin="serial" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M7 29h12" stroke-width="2.4"></path><path d="M13 27 L10 14 L21 8 L26 12" stroke-width="3.2"></path><circle cx="13" cy="27" fill="currentColor" r="2.2" stroke="none"></circle><circle cx="10" cy="14" fill="currentColor" r="2" stroke="none"></circle><circle cx="21" cy="8" fill="currentColor" r="2" stroke="none"></circle></svg></button>
 <button aria-pressed="false" data-kin="pallet" type="button"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M5 29h12" stroke-width="2.4"></path><path d="M11 26 L13 11 L27 13" stroke-width="3"></path><path d="M11 26 L7 24.5 L9 9.5 L13 11" stroke-width="1.6"></path><path d="M27 13 V19 M24 19 H30" stroke-width="2.2"></path></svg></button>
@@ -321,9 +354,14 @@ html[lang="en"] [data-en]{display:revert!important}
 <span aria-label="Тип движения" class="seg" role="group">
 <button aria-pressed="true" data-move="J" title="Интерполяция в пространстве суставов" type="button">MoveJ</button>
 <button aria-pressed="false" data-move="L" title="Прямолинейное движение схвата" type="button">MoveL</button>
+<button aria-pressed="false" data-move="P" id="movePath" type="button"><span>Путь</span></button>
 </span>
 <button aria-pressed="false" class="run" disabled="" id="run" type="button"><span>Пуск</span></button>
 <button id="clear" type="button"><span>Сбросить</span></button>
+<span class="pathctl">
+<button aria-pressed="true" class="pen" id="penBtn" type="button"><span>Перо</span></button>
+<label class="spd"><input id="spd" max="100" min="0" step="1" type="range" value="63"/><output id="spdV">20</output><span>мм/с</span></label>
+</span>
 </span>
 </div>
 <div aria-live="polite" class="status" id="status"></div>
@@ -544,7 +582,7 @@ html[lang="en"] [data-en]{display:revert!important}
   /* robot arm demo with three planar kinematics: serial 3R arm, palletizer (parallelogram) and parallel 5-bar.
      Base frame origin is at (260,400) in SVG units; 1 unit = 4 mm; Y points up in the readout.
      Shared engine: numeric-Jacobian damped least squares IK, joint speed limit, reachable-area map,
-     random-point demo, teach mode (MoveJ / MoveL), pointer and keyboard input (pointer tracking is armed by entering the arm panel and disarmed by the demo). */
+     random-point demo, teach mode (MoveJ / MoveL / a drawn path driven there and back), pointer and keyboard input (pointer tracking is armed by entering the arm panel and disarmed by the demo). */
   var svg=document.getElementById("arm"),cell=document.getElementById("cell"),hero=document.querySelector(".hero");
   var NS="http://www.w3.org/2000/svg",$=function(id){return document.getElementById(id)};
   var D=Math.PI/180,ORIGIN={x:260,y:400},FLOOR_Y=440,RED="#C2413A";
@@ -896,6 +934,7 @@ html[lang="en"] [data-en]{display:revert!important}
     bx.drawImage(cv,0,0,520,520);
     $("nrImg").setAttribute("href",big.toDataURL("image/png"));
     $("noreach").setAttribute("opacity","1");
+    if(pathPts)classifyPath(false);
   }
   function cellCfg(p){var c=cellOf(p);if(c<0||!reach||!reach[c])return null;var r=[];for(var i=0;i<M.n;i++)r.push(cfg[c*M.n+i]);return r}
 
@@ -985,10 +1024,11 @@ html[lang="en"] [data-en]{display:revert!important}
   var trail=[],TR_LIFE=2400,BANDS=14,bands=[];
   function trLife(){return idle?6500:TR_LIFE}
   function drawTrail(now){
-    var tip=TCP,last=trail[trail.length-1];
-    if(!last||Math.hypot(tip.x-last.x,tip.y-last.y)>1)trail.push({x:tip.x,y:tip.y,t:now});
+    var tip=TCP,last=trail[trail.length-1],pen=!pathMode||(penDown&&!(prun&&prun.lift)); /* in path mode the trace is left only while the pen is down */
+    if(pen&&(!last||Math.hypot(tip.x-last.x,tip.y-last.y)>1))trail.push({x:tip.x,y:tip.y,t:now});
     var life=trLife();while(trail.length>1&&now-trail[0].t>life)trail.shift();
-    var g=$("trail"),pts=trail.concat([{x:tip.x,y:tip.y,t:now}]);
+    if(!pen&&trail.length&&now-trail[0].t>life)trail=[];
+    var g=$("trail"),pts=pen?trail.concat([{x:tip.x,y:tip.y,t:now}]):trail.slice();
     if(!bands.length)for(var i=0;i<BANDS;i++){var pl=document.createElementNS(NS,"polyline");pl.setAttribute("fill","none");pl.setAttribute("stroke-linejoin","round");pl.setAttribute("stroke-linecap",i===BANDS-1?"round":"butt");g.appendChild(pl);bands.push(pl)}
     var buf=[];for(i=0;i<BANDS;i++)buf.push("");
     var prevB=-1,prevP=null;
@@ -1004,10 +1044,10 @@ html[lang="en"] [data-en]{display:revert!important}
   /* ---------- teach mode ---------- */
   var wps=[],MAXP=8,moveType="J",running=false,seg=null,msgTimer=0;
   var msgDefault=$("msg").innerHTML;
-  function say(ru,en,warn,note){
+  function say(ru,en,warn,note,ms){
     var m=$("msg");clearTimeout(msgTimer);
     m.textContent=T(ru,en);m.classList.toggle("warn",!!warn);m.classList.toggle("note",!!note);
-    msgTimer=setTimeout(function(){m.classList.remove("warn");m.classList.remove("note");if(hold)m.textContent=holdTxt();else m.innerHTML=wps.length?"":msgDefault},2400);
+    msgTimer=setTimeout(function(){m.classList.remove("warn");m.classList.remove("note");if(hold)m.textContent=holdTxt();else if(pathMode)m.textContent=pathTxt();else m.innerHTML=wps.length?"":msgDefault},ms||2400);
   }
   function renderWps(){
     var g=$("wps");g.innerHTML="";
@@ -1025,11 +1065,14 @@ html[lang="en"] [data-en]{display:revert!important}
       t.setAttribute("fill","var(--ink)");t.setAttribute("font-family","inherit");t.textContent="P"+(i+1);g.appendChild(t);
     });
     cell.classList.toggle("has-points",wps.length>0);
-    $("run").disabled=wps.length<2;
+    syncRun();
     if(wps.length&&!running)$("msg").innerHTML="";
     if(!wps.length)$("msg").innerHTML=msgDefault;
     if(hold)$("msg").textContent=holdTxt();
+    if(pathMode)$("msg").textContent=pathTxt();
   }
+  /* Run is available when there is something to run: two program points, or in path mode a drawn line with a reachable stretch */
+  function syncRun(){$("run").disabled=running?false:pathMode?!(pathInfo&&pathInfo.segs.length):wps.length<2}
   function addPoint(p,exactQ){
     if(running)return;
     if(!exactQ&&!reachable(p)){flagBad(true);say("Точка вне зоны досягаемости","This point is out of reach",true);return}
@@ -1039,12 +1082,18 @@ html[lang="en"] [data-en]{display:revert!important}
   }
   function flagBad(b){$("target").classList.toggle("bad",b)}
   function setRunning(on){
-    running=on&&wps.length>1;
+    var plan=null;
+    if(on&&pathMode){ /* the path is planned from the current pose before the move starts */
+      plan=planRun();
+      if(!plan){on=false;say("Не получается пройти этот путь: на пути столкновение","Cannot follow this path: it collides",true)}
+    }
+    running=on&&(pathMode?!!plan:wps.length>1);
     if(running){var ae=document.activeElement;if(ae&&ae.classList&&ae.classList.contains("man"))ae.blur()}
     $("run").setAttribute("aria-pressed",String(running));
     $("run").textContent=running?T("Стоп","Stop"):T("Пуск","Run");
-    seg=null;
-    if(running)nextSeg(0);else{qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(cur.x,cur.y)}
+    seg=null;prun=null;
+    if(running){if(pathMode)startPath(plan);else nextSeg(0)}else{qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(cur.x,cur.y)}
+    syncRun();
   }
   function nextSeg(i){
     i=i%wps.length;var to=wps[i];
@@ -1074,7 +1123,13 @@ html[lang="en"] [data-en]{display:revert!important}
   /* redundant arm: dynamic programming over the IK grid along the line, so the arm may change its tool angle and elbow
      on the way instead of running into its joint limits; cost = joint motion, steps limited to small jumps */
   function planLineDP(q0,a,b){
-    var L=Math.hypot(b.x-a.x,b.y-a.y),N=Math.max(2,Math.ceil(L/3)),G=M.PHI_N,S=2*G+2,JM=.2,W=3,HOP=8,ALL=[];
+    var L=Math.hypot(b.x-a.x,b.y-a.y),N=Math.max(2,Math.ceil(L/3)),P=[];
+    for(var i=0;i<=N;i++)P.push(pt(a.x+(b.x-a.x)*i/N,a.y+(b.y-a.y)*i/N));
+    return planPolyDP(q0,P,L);
+  }
+  /* the same planner for any polyline P (points about 3 units apart, total length L); a straight line is the special case */
+  function planPolyDP(q0,P,L){
+    var a=P[0],N=P.length-1,G=M.PHI_N,S=2*G+2,JM=.2,W=3,HOP=8,ALL=[];
     for(var i0=0;i0<S;i0++)ALL.push(i0);
     function nb(s2){ /* grid neighbours (same tool angle +-W steps, both elbows) plus the two stretched bridge poses */
       if(s2>=2*G)return ALL;
@@ -1091,7 +1146,7 @@ html[lang="en"] [data-en]{display:revert!important}
     for(s2=0;s2<S;s2++)if(st0[s2]&&c0[s2]===Infinity&&pathFree(q0,st0[s2])){c0[s2]=HOP+jmax(q0,st0[s2]);hop[s2]=true}
     var prevSt=st0,prevCost=c0,par=[],sts=[],hopAt=[];
     for(var k=1;k<=N;k++){
-      var u=k/N,st=M.ikAll(pt(a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u)),cost=new Array(S).fill(Infinity),pr=new Array(S).fill(-1),any=false;
+      var st=M.ikAll(P[k]),cost=new Array(S).fill(Infinity),pr=new Array(S).fill(-1),any=false;
       for(s2=0;s2<S;s2++){
         if(!st[s2])continue;
         var cand=nb(s2);
@@ -1119,8 +1174,8 @@ html[lang="en"] [data-en]{display:revert!important}
       hopAt.push(hk);par.push(pr);sts.push(st);prevSt=st;prevCost=cost;
     }
     var best=-1;bc=Infinity;for(s2=0;s2<S;s2++)if(prevCost[s2]<bc){bc=prevCost[s2];best=s2}
-    var line=new Array(N+1),lineHop=new Array(N+1).fill(false),hops=0;
-    for(k=N;k>=1;k--){line[k]=sts[k-1][best];if(hopAt[k-1]&&hopAt[k-1][best]){lineHop[k]=true;hops++}best=par[k-1][best]}
+    var line=new Array(N+1),lineHop=new Array(N+1).fill(false),hops=0,hopIdx=[];
+    for(k=N;k>=1;k--){line[k]=sts[k-1][best];if(hopAt[k-1]&&hopAt[k-1][best]){lineHop[k]=true;hops++;hopIdx.push(k)}best=par[k-1][best]}
     line[0]=st0[best];
     /* lead-in: self-motion chain or a joint hop from q0 to the chosen start pose */
     var lead=[q0.slice()];
@@ -1129,7 +1184,7 @@ html[lang="en"] [data-en]{display:revert!important}
     /* smooth the tool angle along each continuous run (same elbow, no reconfiguration), keeping only valid small steps */
     function phiOf(x){return x[0]+x[1]+x[2]}
     function elb(x){return x[1]<0?1:0}
-    function onLineP(t){return pt(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t)}
+    function onLineP(t){var xx=t*N,ii=Math.max(0,Math.min(N-1,Math.floor(xx+1e-9))),ff=xx-ii;return pt(P[ii].x+(P[ii+1].x-P[ii].x)*ff,P[ii].y+(P[ii+1].y-P[ii].y)*ff)}
     for(var pass2=0;pass2<3;pass2++)for(k=1;k<N;k++){
       if(lineHop[k]||lineHop[k+1]||Math.abs(line[k][1])<.05)continue;
       var e1=elb(line[k]);if(elb(line[k-1])!==e1||elb(line[k+1])!==e1)continue;
@@ -1155,7 +1210,7 @@ html[lang="en"] [data-en]{display:revert!important}
     var qs=lead.concat(dense),T=[0],nl=lead.length,dsTot=L/LIN_V;
     for(k=1;k<qs.length;k++)T.push(T[k-1]+Math.max(k>=nl?dsTot/(dense.length-1):0,jmax(qs[k-1],qs[k])/LIN_VJ));
     var tot=Math.max(.6,T[T.length-1]),T1=T[T.length-1];for(k=0;k<T.length;k++)T[k]*=tot/Math.max(T1,1e-9);
-    return {qs:qs,T:T,hop:hop[best],hops:hops};
+    return {qs:qs,T:T,hop:hop[best],hops:hops,nl:nl,hopIdx:hopIdx};
   }
   function planLine(q0,a,b){
     if(M.ikAll)return planLineDP(q0,a,b);
@@ -1171,6 +1226,7 @@ html[lang="en"] [data-en]{display:revert!important}
     return {qs:qs,T:T};
   }
   function stepProgram(dt){
+    if(prun){stepPath(dt);return}
     if(seg.type==="J"){
       var leg=seg.legs[seg.leg];leg.t=Math.min(1,leg.t+dt/leg.dur);
       var nq=lerpQ(leg.a,leg.b,ease(leg.t));if(!check(nq))q=nq;
@@ -1186,14 +1242,344 @@ html[lang="en"] [data-en]{display:revert!important}
   }
   document.querySelectorAll("[data-move]").forEach(function(b){
     b.addEventListener("click",function(e){
-      e.stopPropagation();moveType=b.dataset.move;
+      e.stopPropagation();var mt=b.dataset.move;
+      if(mt==="P"){enterPath();return}
+      if(pathMode){lastJL=mt;leavePath();return}
+      moveType=mt;
       document.querySelectorAll("[data-move]").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});
       if(running)nextSeg(seg?seg.i:0);
     });
   });
   $("run").addEventListener("click",function(e){e.stopPropagation();setRunning(!running)});
-  $("clear").addEventListener("click",function(e){e.stopPropagation();setRunning(false);wps=[];renderWps()});
+  $("clear").addEventListener("click",function(e){e.stopPropagation();setRunning(false);if(pathMode){clearPathDraw();return}wps=[];renderWps()});
   $("pendant").addEventListener("pointerdown",function(e){e.stopPropagation()});
+
+  /* ---------- path mode: draw a trajectory, the arm drives along it there and back ---------- */
+  /* A line drawn with the mouse or a finger is smoothed and cut into equal ~3-unit steps. Points the arm cannot reach are
+     marked red and cut off (only the longest reachable stretch is driven). The motion is planned before it starts with the
+     planner MoveL uses (extended to a polyline), so the gripper stays on the line; where the arm has to change its
+     configuration the plan says so (yellow rings, a notice under the floor). While drawing is on, the arm does not follow
+     the cursor. */
+  var pathMode=false,lastJL="J",pathPts=null,pathInfo=null,stroke=null,prun=null,penDown=true,pathSpeed=20;
+  var STEP=3,MAXLEN=2400,PATH_VJ=3,V_MIN=3,V_MAX=60,PATH_A=200,PATH_AL=200; /* step along the line (units), longest line (units), joint speed limit (rad/s), slider range of the gripper speed (mm/s), acceleration along the line and across it (mm/s²) */
+  function plen(p){var s=0;for(var i=1;i<p.length;i++)s+=Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y);return s}
+  /* equal steps along the polyline, the ends are kept */
+  function resamplePts(p,step){
+    var n=p.length,cum=[0],i;
+    for(i=1;i<n;i++)cum.push(cum[i-1]+Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y));
+    var L=cum[n-1],m=Math.max(1,Math.round(L/step)),out=[],k=1;
+    for(i=0;i<=m;i++){
+      var s=L*i/m;while(k<n-1&&cum[k]<s)k++;
+      var d=cum[k]-cum[k-1],f=d>1e-9?Math.max(0,Math.min(1,(s-cum[k-1])/d)):0;
+      out.push(pt(p[k-1].x+(p[k].x-p[k-1].x)*f,p[k-1].y+(p[k].y-p[k-1].y)*f));
+    }
+    return out;
+  }
+  /* repeated [1 2 1]/4 averaging (close to a Gaussian), the end points stay */
+  function smoothPts(p,passes){
+    var n=p.length;if(n<3)return p;
+    for(var s=0;s<passes;s++){
+      var o=[p[0]];
+      for(var i=1;i<n-1;i++)o.push(pt((p[i-1].x+2*p[i].x+p[i+1].x)/4,(p[i-1].y+2*p[i].y+p[i+1].y)/4));
+      o.push(p[n-1]);p=o;
+    }
+    return p;
+  }
+  function pathTxt(){
+    var touch=window.matchMedia("(pointer:coarse)").matches;
+    if(!pathPts)return touch?T("Рисуйте пальцем по панели","Draw with a finger on the panel")
+                            :T("Рисуйте по панели с зажатой кнопкой мыши","Draw on the panel with the mouse button held");
+    if(pathInfo&&!pathInfo.segs.length)return T("Нет участка, который манипулятор может пройти. Нарисуйте путь заново","The arm cannot follow any part of it. Draw the path again");
+    var cut=pathInfo&&pathInfo.cut,jump=pathInfo&&pathInfo.segs.length>1;
+    return T((cut?(jump?"Красное вне зоны пропущено. ":"Красное вне зоны обрезано. "):"")+"«Пуск» — туда и обратно",
+             (cut?(jump?"Red is out of reach, skipped. ":"Red is out of reach, cut off. "):"")+"Run goes there and back");
+  }
+  function pathMsg(){var m=$("msg");clearTimeout(msgTimer);m.classList.remove("warn");m.classList.remove("note");m.textContent=pathTxt()}
+  function pl(pts,attrs){
+    var e=mk("polyline",attrs,$("draw"));
+    e.setAttribute("points",pts.map(function(p){return p.x.toFixed(1)+","+p.y.toFixed(1)}).join(" "));return e;
+  }
+  function renderDraw(){
+    var g=$("draw");g.innerHTML="";
+    var base={fill:"none","stroke-linecap":"round","stroke-linejoin":"round"};
+    function style(o){var r={};for(var k in base)r[k]=base[k];for(k in o)r[k]=o[k];return r}
+    if(stroke&&stroke.pts.length>1){pl(stroke.pts,style({stroke:"var(--steel)","stroke-width":2,opacity:.8}));return}
+    var P=pathPts;if(!P||P.length<2)return;
+    var I=pathInfo;
+    if(!I){pl(P,style({stroke:"var(--steel)","stroke-width":2,opacity:.8}));return}
+    /* 0: driven, 1: out of reach (skipped), 2: reachable but too short a piece to drive, or one the arm cannot get to without a collision */
+    var drv=P.map(function(){return false});
+    I.segs.forEach(function(S){for(var u=S.a;u<=S.b;u++)drv[u]=true});
+    var cls=P.map(function(_,i){return !I.ok[i]?1:drv[i]?0:2});
+    var st=[style({stroke:"var(--ink)","stroke-width":2,opacity:.75}),
+            style({stroke:RED,"stroke-width":2.2,"stroke-dasharray":"5 4"}),
+            style({stroke:"var(--steel)","stroke-width":1.6,"stroke-dasharray":"2 5",opacity:.8})];
+    var i=0;
+    while(i<P.length){
+      var j=i;while(j+1<P.length&&cls[j+1]===cls[i])j++;
+      if(j>i||P.length===1)pl(P.slice(i,Math.min(P.length-1,j+1)+1),st[cls[i]]);
+      i=j+1;
+    }
+    if(I.segs.length){
+      var a=I.segs[0].P[0],lg=I.segs[I.segs.length-1].P,b=lg[lg.length-1];
+      mk("circle",{cx:a.x.toFixed(1),cy:a.y.toFixed(1),r:4,fill:"var(--ink)"},g);
+      mk("circle",{cx:b.x.toFixed(1),cy:b.y.toFixed(1),r:4,fill:"var(--bg)",stroke:"var(--ink)","stroke-width":2},g);
+      I.hopPts.forEach(function(p){mk("circle",{cx:p.x.toFixed(1),cy:p.y.toFixed(1),r:6,fill:"none",stroke:"var(--z-y)","stroke-width":2.2},g)});
+    }
+  }
+
+  /* can the arm really be at this point? (the reach map is only a hint) true / a joint pose, or null */
+  function pointCheck(p,hint){
+    if(!reachable(p))return null;
+    if(M.ikAll){var s=M.ikAll(p);for(var i=0;i<s.length;i++)if(s[i])return true;return null}
+    /* the reach map keeps one pose per cell, and the solver started from it can stall near a joint limit or a singularity.
+       So the point is tried from several starts: the previous point of the line (the pose is then continuous), its own cell, the cells around it */
+    var starts=[],c=cellCfg(p),cx=Math.floor(p.x/CELL),cy=Math.floor(p.y/CELL),dx,dy,n;
+    if(hint&&hint!==true)starts.push(hint);
+    if(c)starts.push(c);
+    for(dy=-1;dy<=1;dy++)for(dx=-1;dx<=1;dx++){
+      if(!dx&&!dy)continue;
+      n=cellCfg({x:(cx+dx+.5)*CELL,y:(cy+dy+.5)*CELL});if(n)starts.push(n);
+    }
+    for(var k=0;k<starts.length;k++){
+      var r=ikFrom(starts[k],p,k<2?60:90,false,k<2?16:6);
+      if(r.err<.8&&!check(r.q))return r.q;
+    }
+    return null;
+  }
+  /* plan for the arm models without a full IK grid (palletizer, five-bar): follow the line from the previous pose; when the
+     step is not continuous, change the configuration with a joint move to another solution at that point */
+  function jointSteps(a,b,out){var n=Math.max(1,Math.ceil(jmax(a,b)/.05));for(var h=1;h<=n;h++)out.push(lerpQ(a,b,h/n))}
+  function planPolyIK(q0,P,alt){
+    var N=P.length-1,r=ikFrom(q0,P[0],80,false,16),cands=[(r.err<=.8&&!check(r.q))?r.q:null,alt[0]],tmp=[],c=null;
+    for(var i=0;i<2&&!c;i++){
+      var x=cands[i];if(!x||x===true)continue;
+      if(pathFree(q0,x)){c=x;jointSteps(q0,x,tmp)}
+      else if(pathFree(q0,M.HOME)&&pathFree(M.HOME,x)){c=x;jointSteps(q0,M.HOME,tmp);jointSteps(M.HOME,x,tmp)}
+    }
+    if(!c)return null;
+    var dense=[tmp.pop()],lead=[q0.slice()].concat(tmp),prev=dense[0],hops=0,hopIdx=[];
+    for(var k=1;k<=N;k++){
+      r=ikFrom(prev,P[k],80,false,16);
+      if(r.err>.8||check(r.q)||jmax(r.q,prev)>.25){
+        var a2=alt[k];if(!a2||!pathFree(prev,a2))return null;
+        var seq=[];jointSteps(prev,a2,seq);for(var h=0;h<seq.length;h++)dense.push(seq[h]);
+        prev=a2;hops++;hopIdx.push(k);
+      }else{dense.push(r.q);prev=r.q}
+    }
+    return {qs:lead.concat(dense),nl:lead.length,hops:hops,hopIdx:hopIdx};
+  }
+  function planPath(q0,P,alt){return M.ikAll?planPolyDP(q0,P,plen(P)):planPolyIK(q0,P,alt)}
+  /* the line may be broken by unreachable gaps: every reachable stretch is driven in turn, and between two stretches the arm crosses the gap
+     with a joint move and the pen lifted (no trace is left there). The first stretch is approached from the current pose. */
+  function planRun(){
+    var I=pathInfo;if(!I||!I.segs.length)return null;
+    var qc=q.slice(),legs=[],intro=null,hops=0,hopPts=[],ok=0;
+    I.segs.forEach(function(S){
+      var pl=planPath(qc,S.P,S.alt);S.blocked=!pl;if(!pl)return;
+      var lead=pl.qs.slice(0,pl.nl+1),line=pl.qs.slice(pl.nl),moved=lead.length>2||jmax(lead[0],lead[lead.length-1])>1e-3;
+      if(moved){var Lg={qs:lead,pen:false};if(!ok)intro=Lg;else legs.push(Lg)}
+      legs.push({qs:line,pen:true});
+      hops+=pl.hops;pl.hopIdx.forEach(function(k){hopPts.push(S.P[k])});
+      qc=line[line.length-1].slice();ok++;
+    });
+    return ok?{intro:intro,legs:legs,hops:hops,hopPts:hopPts}:null;
+  }
+
+  /* marks reachable / unreachable points of the drawn line for the current kinematics, keeps the longest reachable stretch */
+  function classifyPath(announce,capped){
+    var P=pathPts;pathInfo=null;
+    if(!P||P.length<2||!reach){renderDraw();syncRun();return}
+    var n=P.length,ok=[],alt=[],i,nOut=0;
+    var prev=null;
+    for(i=0;i<n;i++){var r=pointCheck(P[i],prev);ok.push(!!r);alt.push(r);if(!r)nOut++;prev=r}
+    var segs=[];i=0;
+    while(i<n){
+      if(!ok[i]){i++;continue}
+      var j=i;while(j+1<n&&ok[j+1])j++;
+      if(j-i>=5)segs.push({a:i,b:j,P:P.slice(i,j+1),alt:alt.slice(i,j+1),blocked:false});
+      i=j+1;
+    }
+    var I={ok:ok,alt:alt,segs:segs,hopPts:[],hops:0,blocked:false,cut:0};
+    pathInfo=I;
+    var plan=segs.length?planRun():null; /* a preview from the current pose: finds the configuration changes on the way */
+    if(segs.length&&!plan){I.segs=[];I.blocked=true}
+    else if(plan){I.segs=segs.filter(function(S){return !S.blocked});I.hops=plan.hops;I.hopPts=plan.hopPts}
+    var driven=0;I.segs.forEach(function(S){driven+=S.b-S.a+1});I.cut=n-driven;
+    renderDraw();syncRun();
+    if(!announce)return;
+    if(!I.segs.length){
+      if(I.blocked)say("Манипулятор не может пройти по этому пути без столкновений","The arm cannot follow this path without a collision",true,false,4500);
+      else say("Весь путь вне зоны досягаемости","The whole path is out of reach",true,false,4500);
+      return;
+    }
+    var ru="",en="";
+    if(I.cut){
+      if(I.segs.length>1){ru+="Красное вне зоны пропущено, манипулятор перескакивает с поднятым пером. ";en+="Red is out of reach and skipped; the arm hops over it, pen up. "}
+      else{ru+="Участки вне зоны досягаемости (красные) обрезаны. ";en+="Parts out of reach (red) are cut off. "}
+    }
+    if(I.hops){ru+="На пути смена конфигурации (жёлтые кольца). ";en+="The arm changes configuration on the way (yellow rings). "}
+    if(capped){ru+="Линия обрезана по длине. ";en+="The line is cut to the maximum length. "}
+    if(ru)say(ru.trim(),en.trim(),!!I.cut||!!capped,!I.cut&&!!I.hops,5000);
+    else say("Путь готов: «Пуск» — туда и обратно","Path ready: Run drives it there and back",false,false,3000);
+  }
+
+  /* ---- drawing with the pointer ---- */
+  function beginStroke(e){
+    if(e.pointerType==="mouse"&&e.button!==0)return;
+    if(running)setRunning(false);
+    stroke={id:e.pointerId,pts:[inPanel(toSvg(e))],len:0,capped:false};pathPts=null;pathInfo=null;
+    try{cell.setPointerCapture(e.pointerId)}catch(_){}
+    cell.classList.add("drawing");pathMsg();renderDraw();syncRun();
+  }
+  function addStroke(e){
+    var evs=e.getCoalescedEvents?e.getCoalescedEvents():null,s=stroke;if(!evs||!evs.length)evs=[e];
+    for(var i=0;i<evs.length;i++){
+      var p=inPanel(toSvg(evs[i])),l=s.pts[s.pts.length-1],d=Math.hypot(p.x-l.x,p.y-l.y);
+      if(d<1.2)continue;
+      if(s.len+d>MAXLEN){s.capped=true;break}
+      s.len+=d;s.pts.push(p);
+    }
+    renderDraw();
+  }
+  function endStroke(e){
+    if(!stroke||e.pointerId!==stroke.id)return;
+    var raw=stroke.pts,capped=stroke.capped;stroke=null;cell.classList.remove("drawing");
+    try{cell.releasePointerCapture(e.pointerId)}catch(_){}
+    if(raw.length<2||plen(raw)<15){pathPts=null;pathInfo=null;renderDraw();syncRun();say("Линия слишком короткая","The line is too short",true);return}
+    pathPts=resamplePts(smoothPts(resamplePts(raw,2),10),STEP);
+    classifyPath(true,capped);
+  }
+  function clearPathDraw(){stroke=null;pathPts=null;pathInfo=null;renderDraw();syncRun();pathMsg()}
+  cell.addEventListener("pointerup",endStroke);
+  cell.addEventListener("pointercancel",endStroke);
+
+  /* ---- driving there and back ---- */
+  /* time of every step of a leg. The speed along the line follows what a real controller would allow: the slider sets the top speed, but the arm
+     slows down before sharp bends (lateral acceleration limit), never exceeds the joint speed limit, and starts and stops at rest with a steady acceleration.
+     It is a forward-and-backward pass over the nodes, so the braking begins early enough. */
+  function timing(qs,joint){
+    var n=qs.length,vmax=pathSpeed/MMU,A=PATH_A/MMU,AL=PATH_AL/MMU,P=[],ds=[0],jm=[0],v=[],k,w;
+    for(k=0;k<n;k++)P.push(M.tcp(qs[k]));
+    for(k=1;k<n;k++){
+      var d=isFinite(P[k].x)&&isFinite(P[k-1].x)?Math.hypot(P[k].x-P[k-1].x,P[k].y-P[k-1].y):0;
+      ds.push(d);jm.push(jmax(qs[k-1],qs[k]));
+    }
+    if(joint){ /* a pen-up move between poses is a joint move: its pace is set in joint space, and it follows the slider only loosely */
+      vmax=Math.max(.5,Math.min(2,.4+pathSpeed*.03));A=4;ds=jm.slice();
+      for(k=0;k<n;k++)v.push(k&&k<n-1?vmax:0);
+      for(k=1;k<n;k++)v[k]=Math.min(v[k],Math.sqrt(v[k-1]*v[k-1]+2*A*ds[k]));
+      for(k=n-2;k>=0;k--)v[k]=Math.min(v[k],Math.sqrt(v[k+1]*v[k+1]+2*A*ds[k+1]));
+      var TJ=[0];
+      for(k=1;k<n;k++){var sv=v[k-1]+v[k];TJ.push(TJ[k-1]+Math.max(ds[k]>1e-9?(sv>1e-9?2*ds[k]/sv:2*Math.sqrt(ds[k]/A)):0,1e-4))}
+      return TJ;
+    }
+    for(k=0;k<n;k++){
+      var c=vmax;
+      if(k>0&&jm[k]>1e-6&&ds[k]>0)c=Math.min(c,ds[k]*PATH_VJ/jm[k]); /* joints */
+      if(k+1<n&&jm[k+1]>1e-6&&ds[k+1]>0)c=Math.min(c,ds[k+1]*PATH_VJ/jm[k+1]);
+      w=Math.min(3,k,n-1-k); /* bend: turning angle over a short window, so that the 0.8 mm steps do not make the estimate noisy */
+      if(w>0){
+        var ax=P[k].x-P[k-w].x,ay=P[k].y-P[k-w].y,bx=P[k+w].x-P[k].x,by=P[k+w].y-P[k].y,la=Math.hypot(ax,ay),lb=Math.hypot(bx,by);
+        if(la>1e-9&&lb>1e-9){
+          var th=Math.abs(Math.atan2(ax*by-ay*bx,ax*bx+ay*by));
+          if(th>1e-3)c=Math.min(c,Math.sqrt(AL*(la+lb)/2/th)); /* v^2 / r <= AL with r = arc length / turning angle */
+        }
+      }
+      v.push(Math.max(c,vmax*.1)); /* never quite stops mid-line, so that a sharp reversal does not take ages */
+    }
+    v[0]=0;v[n-1]=0;
+    for(k=1;k<n;k++)v[k]=Math.min(v[k],Math.sqrt(v[k-1]*v[k-1]+2*A*ds[k]));
+    for(k=n-2;k>=0;k--)v[k]=Math.min(v[k],Math.sqrt(v[k+1]*v[k+1]+2*A*ds[k+1]));
+    var T=[0];
+    for(k=1;k<n;k++){
+      var sv=v[k-1]+v[k],dt=ds[k]>1e-9?(sv>1e-9?2*ds[k]/sv:2*Math.sqrt(ds[k]/A)):0;
+      T.push(T[k-1]+Math.max(dt,jm[k]/PATH_VJ,1e-4));
+    }
+    return T;
+  }
+  function retime(L){ /* the speed slider moved during a leg: keep the position, change the pace; the old pace relaxes into the new one without a jump */
+    var k=Math.max(1,Math.min(L.k,L.T.length-1)),o=L.T[k]-L.T[k-1],f=(L.tau-L.T[k-1])/Math.max(o,1e-9),T=timing(L.qs,L.joint),nw=T[k]-T[k-1];
+    L.tau=T[k-1]+Math.max(0,Math.min(1,f))*nw;L.T=T;
+    if(o>1e-6&&nw>1e-6)L.vel=Math.max(.25,Math.min(4,nw/o*L.vel));
+  }
+  function startPath(plan){
+    var back=plan.legs.slice().reverse().map(function(L){return {qs:L.qs.slice().reverse(),pen:L.pen}});
+    prun={intro:plan.intro,fwd:plan.legs,back:back,i:0,leg:null,wait:0,phase:plan.intro?0:1,lift:false};
+    if(plan.hops)seg={note:{ru:"Путь: смена конфигурации, схват ненадолго сходит с линии",en:"Path: configuration change, the gripper briefly leaves the line",c:"var(--z-y)"}};
+  }
+  function setSpeed(s){ /* the slider is exponential: equal steps change the speed by equal factors, so every part of it is felt */
+    pathSpeed=V_MIN*Math.pow(V_MAX/V_MIN,s/100);$("spdV").textContent=pathSpeed<10?pathSpeed.toFixed(1).replace(/\.0$/,""):String(Math.round(pathSpeed));
+  }
+  function pathTA(){return Math.max(.15,Math.min(.5,pathSpeed/120))} /* how fast a change of the slider takes effect */
+  function stepPath(dt){
+    var P=prun,dv=dt/pathTA();
+    if(!P.leg){
+      if(P.wait>0){P.wait-=dt;return}
+      var Lg=(P.phase===0?[P.intro]:P.phase===1?P.fwd:P.back)[P.i];
+      P.leg={qs:Lg.qs,T:timing(Lg.qs,!Lg.pen),joint:!Lg.pen,tau:0,vel:1,k:1,lead:P.phase===0};P.lift=!Lg.pen;
+    }
+    var L=P.leg,T=L.T,Tn=T[T.length-1];
+    L.vel+=Math.max(-dv,Math.min(dv,1-L.vel)); /* the pace itself is in T (ramps, bends); vel only smooths a change of the slider */
+    L.tau=Math.min(Tn,L.tau+L.vel*dt);
+    var k=L.k;while(k>1&&T[k-1]>L.tau)k--;while(k<T.length-1&&T[k]<L.tau)k++;L.k=k;
+    var f=(L.tau-T[k-1])/Math.max(T[k]-T[k-1],1e-9),nq=lerpQ(L.qs[k-1],L.qs[k],Math.max(0,Math.min(1,f)));
+    if(!check(nq))q=nq;
+    if(Tn-L.tau<1e-3){
+      var end=L.qs[L.qs.length-1];if(!check(end))q=end.slice();
+      var lst=P.phase===0?[P.intro]:P.phase===1?P.fwd:P.back;
+      P.leg=null;P.i++;
+      if(P.i>=lst.length){P.i=0;P.phase=P.phase===1?2:1;P.wait=L.lead?.2:.25} /* a full pass is done: a short rest at the end of the line */
+      else P.wait=.1;
+    }
+  }
+
+  /* ---- entering and leaving the mode ---- */
+  function setPathUI(){
+    cell.classList.toggle("path-mode",pathMode);
+    $("pathBtn").setAttribute("aria-pressed",String(pathMode));
+    document.querySelectorAll("[data-move]").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.move===moveType))});
+    cropView();renderDraw();syncRun();
+  }
+  /* on phones the empty unreachable band above the workspace is cut off while drawing (the CSS sizes the panel to match; all pointer maths go through the SVG matrix) */
+  var narrow=window.matchMedia("(max-width:520px)");
+  function cropView(){svg.setAttribute("viewBox",pathMode&&narrow.matches?"0 120 520 400":"0 0 520 520")}
+  if(narrow.addEventListener)narrow.addEventListener("change",cropView);
+  function enterPath(){
+    if(pathMode)return;
+    if(hold)releaseHold();
+    if(running)setRunning(false);
+    lastJL=moveType;pathMode=true;moveType="P";
+    reconf=null;demo=null;idle=null;parked=false;qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);
+    $("target").setAttribute("opacity","0");flagBad(false);
+    setPathUI();pathMsg();
+  }
+  function leavePath(){
+    if(!pathMode)return;
+    if(running)setRunning(false);
+    if(stroke){try{cell.releasePointerCapture(stroke.id)}catch(_){}stroke=null}
+    cell.classList.remove("drawing");
+    pathMode=false;moveType=lastJL;
+    qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);
+    setPathUI();
+    var m=$("msg");clearTimeout(msgTimer);m.classList.remove("warn");m.classList.remove("note");
+    if(hold)m.textContent=holdTxt();else m.innerHTML=wps.length?"":msgDefault;
+  }
+  /* pen: the gripper leaves a trace only while the pen is down, so the traced line can be compared with the drawn path,
+     or the arm can move along it without tracing */
+  function setPen(on){penDown=on;$("penBtn").setAttribute("aria-pressed",String(on));if(on)trail=[]}
+  (function(){
+    var t=T("Рисование траектории","Draw a trajectory"),b=$("pathBtn");b.title=t;b.setAttribute("aria-label",t);
+    b.addEventListener("click",function(e){e.stopPropagation();if(pathMode)leavePath();else enterPath()});
+    $("movePath").title=T("Рисование траектории: робот проходит линию туда и обратно","Draw a trajectory: the arm drives along the line there and back");
+    var pt2=T("Перо: след остаётся, пока перо опущено","Pen: the gripper leaves a trace while the pen is down");
+    $("penBtn").title=pt2;$("penBtn").setAttribute("aria-label",pt2);
+    $("penBtn").addEventListener("click",function(e){e.stopPropagation();setPen(!penDown)});
+    var st=T("Скорость схвата, мм/с (не быстрее, чем позволяют сочленения)","Gripper speed, mm/s (not faster than the joints allow)"),sp=$("spd");
+    sp.title=st;sp.setAttribute("aria-label",st);
+    sp.addEventListener("input",function(){setSpeed(+sp.value);if(prun&&prun.leg)retime(prun.leg)});
+    setSpeed(+sp.value);
+  })();
 
   /* ---------- kinematics switch ---------- */
   function setModel(id,animate){
@@ -1201,6 +1587,7 @@ html[lang="en"] [data-en]{display:revert!important}
     function apply(){
       M=MODELS[id];buildToken++;q=M.q0.slice();qd=q.slice();manQ=manP=null;clearPend();parked=false;
       setRunning(false);wps=[];renderWps();reconf=null;idle=null;demo=null;blocked=false;trail=[];
+      pathInfo=null;renderDraw();syncRun(); /* the drawn line is kept, it is checked again for this kinematics once the reach map is built */
       reach=null;reachList=[];$("noreach").setAttribute("opacity","0");
       g.innerHTML="";drawModel=M.build(g);buildGauges(g);
       q=M.q0.slice();qd=q.slice();draw();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);
@@ -1236,13 +1623,13 @@ html[lang="en"] [data-en]{display:revert!important}
   function homeQ(){var z=[];for(var i=0;i<M.n;i++)z.push(zero(i));return z}
   function startHome(){
     $("target").setAttribute("opacity","0");flagBad(false);
-    if(hold||running||press||idle||(reconf&&reconf.home))return;
+    if(hold||pathMode||running||press||idle||(reconf&&reconf.home))return;
     var z=homeQ(),dm=0;for(var i=0;i<M.n;i++)dm=Math.max(dm,Math.abs(z[i]-q[i]));
     if(dm<.5*D||check(z)){parked=dm<.5*D;return}
     reconf={legs:planJoint(z).map(function(b){return {b:b}}),stuck:0,home:true};
   }
   function steer(e){
-    var p=toSvg(e);lastMove=performance.now();if(hold)return p;
+    var p=toSvg(e);lastMove=performance.now();if(hold||pathMode)return p;
     if(belowFloor(e,p)&&!press){startHome();return p}
     if(reconf&&reconf.home){reconf=null;qd=q.slice();cur=pt(TCP.x,TCP.y)} /* the pointer is back: take over from where the arm is */
     parked=false;showTarget(p);
@@ -1254,6 +1641,8 @@ html[lang="en"] [data-en]{display:revert!important}
   cell.addEventListener("pointerleave",function(e){if(e.pointerType==="mouse"){inside=false;if(engaged)startHome()}});
   hero.addEventListener("pointerleave",function(e){inside=false;if(e.pointerType==="mouse"&&!hold){$("target").setAttribute("opacity","0");flagBad(false)}});
   hero.addEventListener("pointermove",function(e){
+    if(stroke&&e.pointerId===stroke.id){addStroke(e);return} /* drawing a path */
+    if(pathMode)return; /* path mode: the arm does not follow the cursor */
     if(e.pointerType!=="mouse"&&!press)return;
     if(e.pointerType==="mouse"&&inCellEl(e)){inside=true;engaged=true} /* pointer already inside the panel when the page loads */
     if(!engaged)return;
@@ -1263,6 +1652,7 @@ html[lang="en"] [data-en]{display:revert!important}
   });
   cell.addEventListener("pointerdown",function(e){
     if(belowFloor(e,toSvg(e)))return;
+    if(pathMode){beginStroke(e);return}
     press={x:e.clientX,y:e.clientY,t:performance.now(),drag:false,man:hold};engaged=true;
     try{cell.setPointerCapture(e.pointerId)}catch(_){}
     steer(e);
@@ -1276,10 +1666,11 @@ html[lang="en"] [data-en]{display:revert!important}
   cell.addEventListener("pointerup",release);
   cell.addEventListener("pointercancel",release);
   var kbdMsg=T("Стрелки двигают схват, с Shift быстрее, Enter ставит точку, Esc сбрасывает","Arrows move the gripper, Shift is faster, Enter adds a point, Esc clears");
-  cell.addEventListener("focus",function(){var kb=true;try{kb=cell.matches(":focus-visible")}catch(_){}if(kb&&!wps.length&&!running)$("msg").textContent=kbdMsg});
-  cell.addEventListener("blur",function(){if(!wps.length&&!running)$("msg").innerHTML=msgDefault;if(hold)$("msg").textContent=holdTxt()});
+  cell.addEventListener("focus",function(){var kb=true;try{kb=cell.matches(":focus-visible")}catch(_){}if(kb&&!wps.length&&!running&&!pathMode)$("msg").textContent=kbdMsg});
+  cell.addEventListener("blur",function(){if(pathMode)return; /* the buttons must not move under the pointer while it is pressed */if(!wps.length&&!running)$("msg").innerHTML=msgDefault;if(hold)$("msg").textContent=holdTxt()});
   cell.addEventListener("keydown",function(e){
     if(e.target!==cell)return;
+    if(pathMode){if(e.key==="Escape"){e.preventDefault();setRunning(false);clearPathDraw()}return}
     var step=e.shiftKey?18:5,dx=0,dy=0;
     if(e.key==="ArrowLeft")dx=-step;else if(e.key==="ArrowRight")dx=step;else if(e.key==="ArrowUp")dy=-step;else if(e.key==="ArrowDown")dy=step;
     if(dx||dy){
@@ -1331,6 +1722,7 @@ html[lang="en"] [data-en]{display:revert!important}
   function enterHold(){
     if(running)return;
     var m=$("msg");
+    if(pathMode)leavePath(); /* manual input and drawing a path exclude each other */
     if(hold)return; /* already held: keep a manual move that is under way */
     hold=true;manQ=manP=null;clearPend();syncMan();
     reconf=null;demo=null;idle=null;qd=q.slice();cur=pt(TCP.x,TCP.y);goal=pt(TCP.x,TCP.y);
@@ -1466,7 +1858,7 @@ html[lang="en"] [data-en]{display:revert!important}
     var dt=Math.min(.05,(now-prev)/1000);prev=now;
     if(running){blocked=false;stepProgram(dt)}
     else{
-      var quiet=!hold&&!inside&&!press&&document.activeElement!==cell&&now-lastMove>(lastMove<0?1500:IDLE_MS)&&!wps.length&&!reduce;
+      var quiet=!hold&&!pathMode&&!inside&&!press&&document.activeElement!==cell&&now-lastMove>(lastMove<0?1500:IDLE_MS)&&!wps.length&&!reduce;
       if(quiet&&reachList.length){
         if(!idle){idle={t:now};startDemo();reconf=null;engaged=false;$("target").setAttribute("opacity","0");flagBad(false)}
         stepDemo(dt);qd=q.slice();draw();cur=pt(TCP.x,TCP.y);goal=pt(cur.x,cur.y);blocked=false;
@@ -1474,8 +1866,8 @@ html[lang="en"] [data-en]{display:revert!important}
       }
       idle=null;
       var k=reduce?1:1-Math.exp(-TRACK_RATE*dt); /* same feel at 60 and 120 Hz */
-      if(!hold){cur.x+=(goal.x-cur.x)*k;cur.y+=(goal.y-cur.y)*k}
-      if(hold){
+      if(!hold&&!pathMode){cur.x+=(goal.x-cur.x)*k;cur.y+=(goal.y-cur.y)*k}
+      if(hold||pathMode){
         /* manual input: the arm holds its pose and only moves to the entered joint angles or TCP */
         if(reconf){
           var hl=reconf.legs[0];
