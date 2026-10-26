@@ -43,9 +43,10 @@ try{var th=localStorage.getItem("theme");if(th==="light"||th==="dark")document.d
   --ink:#1B2430;      /* graphite navy */
   --steel:#66737F;
   --rule:#C3CBD2;
-  --safety:#F2B705;   /* industrial safety yellow, used only for joints and focus */
+  --safety:#F2B705;   /* industrial safety yellow: arm joints, focus ring, and the "current / on" state (timeline dot, pressed Run) */
   --link:#1F4E79;
   --z-g:#2E9E5B;--z-y:#E3A500;--z-r:#C9302C;
+  --err:#B3342C;      /* errors and warnings; lighter in the dark theme */
   --font:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 }
 :root{color-scheme:light dark}
@@ -53,13 +54,13 @@ try{var th=localStorage.getItem("theme");if(th==="light"||th==="dark")document.d
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#161B21; --panel:#1E252D; --ink:#E4E8EC; --steel:#94A1AD; --rule:#2E3741; --link:#9CC3EA;
-    --z-g:#4CC283; --z-y:#F2B705; --z-r:#EF5B55;
+    --z-g:#4CC283; --z-y:#F2B705; --z-r:#EF5B55; --err:#EF5B55;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#161B21; --panel:#1E252D; --ink:#E4E8EC; --steel:#94A1AD; --rule:#2E3741; --link:#9CC3EA;
-  --z-g:#4CC283; --z-y:#F2B705; --z-r:#EF5B55;
+  --z-g:#4CC283; --z-y:#F2B705; --z-r:#EF5B55; --err:#EF5B55;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -74,7 +75,7 @@ header .who{font-weight:600;color:var(--ink);text-decoration:none;font-size:16px
 .lang{display:flex;gap:2px;font-size:15px}
 .lang a{color:var(--steel);padding:4px 8px;border-radius:6px;text-decoration:none}
 .lang a:hover{color:var(--ink)}
-.lang a[aria-current="page"]{color:var(--ink);font-weight:650;background:var(--panel)}
+.lang a[aria-current="page"]{color:var(--ink);font-weight:600;background:var(--panel)}
 .tools{display:flex;align-items:center;gap:6px}
 .theme{width:34px;height:34px;padding:0;border:0;border-radius:8px;background:none;color:var(--steel);display:grid;place-items:center;cursor:pointer}
 .theme:hover{color:var(--ink);background:var(--panel)}
@@ -92,7 +93,7 @@ h1 span{display:block}
   html[lang="en"] h1{font-size:min(clamp(52px,8vw,104px),17.8cqi)}
 }
 .intro{font-size:clamp(19px,2vw,22px);line-height:1.5;max-width:30ch;margin:0 0 32px;color:var(--ink)}
-.links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:17px;font-weight:550}
+.links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:17px;font-weight:600}
 .links a{color:var(--ink)}
 
 .kin{position:absolute;right:14px;top:12px;display:flex;gap:5px;z-index:2}
@@ -108,7 +109,7 @@ h1 span{display:block}
 .cell:focus-visible{outline:3px solid var(--safety);outline-offset:3px}
 .cell{position:relative;container-type:inline-size;background:var(--panel);border-radius:20px;aspect-ratio:1/1;max-height:560px;width:100%;overflow:hidden;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none}
 .cell svg{display:block;width:100%;height:100%}
-.cell .bad{stroke:#C2413A}
+.cell .bad{stroke:var(--err)}
 .readout{position:absolute;left:20px;right:20px;bottom:16px;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--steel);font-variant-numeric:tabular-nums;pointer-events:none}
 .readout .joints,.readout .tcp{display:flex;gap:12px}
 .readout .tcp{gap:8px;margin-left:auto}
@@ -116,7 +117,7 @@ h1 span{display:block}
 .status{display:none}
 @media (max-width:520px){
   #singTxt{display:none}
-  .status{display:block;position:absolute;left:12px;right:12px;bottom:calc(15.4% + 6px);text-align:center;font-size:12.5px;line-height:1.3;pointer-events:none}
+  .status{display:block;position:absolute;left:12px;right:12px;bottom:calc(15.4% + 6px);text-align:center;font-size:13px;line-height:1.3;pointer-events:none}
   .status:empty{display:none}
   .status span{background:var(--panel);box-shadow:0 0 0 3px var(--panel);border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 }
@@ -128,7 +129,7 @@ h1 span{display:block}
 .readout input:hover{border-bottom-color:var(--steel)}
 .readout input:focus{outline:none;background:var(--bg);border-bottom:1.5px solid var(--ink)}
 .readout input:focus-visible{outline:3px solid var(--safety);outline-offset:1px}
-.readout input.pending{color:#C2413A;border-bottom:1.5px dashed #C2413A}
+.readout input.pending{color:var(--err);border-bottom:1.5px dashed var(--err)}
 .readout input[readonly]{border-bottom-color:transparent;cursor:default}
 @media (pointer:coarse){.readout input{font-size:16px}} /* iOS zooms into inputs smaller than 16px */
 .touch-only{display:none}
@@ -141,7 +142,7 @@ h1 span{display:block}
 .pendant{position:absolute;left:16px;right:319px;top:14px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;color:var(--steel)}
 .pendant .row0{display:flex;align-items:center;gap:8px;min-width:0}
 .pendant .msg{padding:4px 4px;min-width:0}
-.pendant .msg.warn{color:#C2413A}
+.pendant .msg.warn{color:var(--err)}
 .pendant .msg.note{color:var(--z-y)}
 .pendant button{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--rule);background:var(--bg);color:var(--ink);padding:4px 10px;border-radius:8px;line-height:1.4}
 .pendant button:disabled{opacity:.45;cursor:default}
@@ -177,7 +178,7 @@ h1 span{display:block}
 .pendant .trpop .g.f{flex:1 1 130px}
 .pendant .trpop .g.f.ln{flex-basis:210px} /* the lines slider with its points button and the trace slider with its eraser: side by side only where both fit, otherwise on two rows */
 .pendant .trpop .g.f.tc{flex-basis:175px}
-.pendant .trpop .g>b{font-weight:500;white-space:nowrap}
+.pendant .trpop .g>b{font-weight:600;white-space:nowrap}
 .pendant .trpop .sw{display:flex;gap:5px;flex:none}
 .pendant .trpop .sw button{width:20px;height:20px;padding:0;border-radius:50%;border:2px solid var(--bg);background:var(--c);box-shadow:0 0 0 1px var(--rule)}
 .pendant .trpop .sw button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
@@ -207,7 +208,7 @@ h1 span{display:block}
 .cell.strip{aspect-ratio:auto;max-height:none}
 @container (max-width:479px){
   .cell.ui:not(.meas):not(.has-points):not(.path-mode) .pendant{--ml:2} /* the hint alone may take two lines, with the controls it is one (the controls are measured with one) */
-  .cell.ui .pendant .msg{font-size:12.5px}
+  .cell.ui .pendant .msg{font-size:13px}
 }
 @media (max-width:520px){
   .cell.ui .pendant{left:12px;right:12px}
@@ -220,7 +221,7 @@ h1 span{display:block}
 
 /* sections */
 section{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px 48px;padding:56px 0;border-top:1px solid var(--rule)}
-h2{font-size:22px;font-weight:650;letter-spacing:-.01em;margin:0;line-height:1.3}
+h2{font-size:22px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.3}
 .side{display:flex;flex-direction:column;gap:24px}
 .portrait{width:100%;max-width:240px;height:auto;border-radius:16px;display:block;background:var(--panel)}
 .prose p{margin:0 0 1em;max-width:62ch}
@@ -231,9 +232,9 @@ h2{font-size:22px;font-weight:650;letter-spacing:-.01em;margin:0;line-height:1.3
 .records{list-style:none;margin:0;padding:0;display:grid;gap:24px;max-width:64ch}
 .records .kind{display:block;color:var(--steel);font-size:15px}
 .records .title{display:block;font-weight:600}
-.records .meta{display:block;color:var(--steel);font-size:15.5px;margin-top:2px}
+.records .meta{display:block;color:var(--steel);font-size:15px;margin-top:2px}
 .mentions{list-style:none;margin:0;padding:0;display:grid;gap:20px;max-width:64ch}
-.mentions a{color:var(--ink);font-weight:550}
+.mentions a{color:var(--ink);font-weight:600}
 .mentions .src{display:block;color:var(--steel);font-size:15px;margin-top:2px}
 
 .chain{list-style:none;margin:0;padding:0;position:relative}
@@ -242,23 +243,23 @@ h2{font-size:22px;font-weight:650;letter-spacing:-.01em;margin:0;line-height:1.3
 .chain li:last-child{padding-bottom:0}
 .chain li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--steel)}
 .chain li.now::before{background:var(--safety);border-color:var(--ink)}
-.chain .org{font-weight:650}
+.chain .org{font-weight:600}
 .chain .what{color:var(--steel);max-width:58ch}
 
 .kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-.kit h3{font-size:17px;font-weight:650;margin:0 0 8px}
+.kit h3{font-size:17px;font-weight:600;margin:0 0 8px}
 .kit ul{list-style:none;margin:0;padding:0;color:var(--steel)}
 .kit li{padding:2px 0}
 
 
-.contact-big{font-size:clamp(28px,4.4vw,46px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin:0 0 18px}
+.contact-big{font-size:clamp(28px,4.4vw,46px);font-weight:760;letter-spacing:-.025em;line-height:1.1;margin:0 0 18px}
 .contact-big a{color:var(--ink);text-decoration-thickness:2px}
-.contact-list{display:flex;flex-wrap:wrap;gap:10px 28px;font-weight:550}
+.contact-list{display:flex;flex-wrap:wrap;gap:10px 28px;font-weight:600}
 
 footer{padding:40px 0 56px;color:var(--steel);font-size:14px;border-top:1px solid var(--rule)}
 
 .courses{display:grid;gap:26px;max-width:64ch}
-.courses h3{font-size:17px;font-weight:650;margin:0 0 6px}
+.courses h3{font-size:17px;font-weight:600;margin:0 0 6px}
 .courses p{margin:0;color:var(--steel)}
 .courses .lead-s{margin-bottom:6px}
 .courses ul{margin:0;padding-left:1.1em;color:var(--steel)}
@@ -357,7 +358,7 @@ html[lang="en"] [data-en]{display:revert!important}
 </mask>
 </defs>
 <rect fill="url(#hatch)" height="1120" id="noreach" mask="url(#nrMask)" opacity="0" width="520" x="0" y="-600"></rect>
-<text fill="#C2413A" font-family="inherit" font-size="13" id="singTxt" stroke="none" text-anchor="middle" x="260" y="463"></text>
+<text fill="var(--err)" font-family="inherit" font-size="13" id="singTxt" stroke="none" text-anchor="middle" x="260" y="463"></text>
 <line stroke="var(--steel)" stroke-width="2" x1="40" x2="480" y1="440" y2="440"></line>
 <g fill="var(--steel)" id="ruler" stroke="var(--steel)" style="display:none"></g>
 <g id="path"></g>
@@ -652,7 +653,7 @@ html[lang="en"] [data-en]{display:revert!important}
      random-point demo, teach mode (MoveJ / MoveL / a drawn path driven there and back), pointer and keyboard input (pointer tracking is armed by entering the arm panel and disarmed by the demo). */
   var svg=document.getElementById("arm"),cell=document.getElementById("cell"),hero=document.querySelector(".hero");
   var NS="http://www.w3.org/2000/svg",$=function(id){return document.getElementById(id)};
-  var D=Math.PI/180,ORIGIN={x:260,y:400},FLOOR_Y=440,RED="#C2413A";
+  var D=Math.PI/180,ORIGIN={x:260,y:400},FLOOR_Y=440,RED="var(--err)";
   /* coordinates are in real on-screen millimetres (CSS mm, 96 px = 25.4 mm): MMU = mm per SVG unit, follows the panel size.
      Base frame: X from the axis of the base, Y up from the floor */
   var PX_MM=96/25.4,MMU=.26;
